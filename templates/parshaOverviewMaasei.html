@@ -1,0 +1,105 @@
+<ion-view id="page10" hide-nav-bar="hideNavigation" can-swipe-back="false">
+    <ion-nav-bar class="bar-positive" align-title="center" ng-style="{'background-color': sectionColor}">
+        <ion-nav-buttons side="left">
+            <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+            <!--button ng-click="hashtag();openModal();" class="button button-icon icon ion-navicon"></button-->
+            
+        </ion-nav-buttons>
+        <ion-nav-title>
+            <label class="page-label page-title">{{section | uppercase}}</label>
+            <label class="page-label page-date-title">{{date}}</label>
+            <label class="page-label page-sub-title">{{parsha_title}}</label>
+        </ion-nav-title>
+        <ion-nav-buttons side="right">
+            <button id="chumashJune102016-button11" class="btn" style="border:none;background:transparent;" ng-click="showDatePicker()">
+                <img src="img/calendar.png"></img>
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content on-scroll="scrollEvent()" delegate-handle="scrollHandle" padding="true" class="has-header">
+        <!--
+        <div id="chumashJune102016-button-bar12" class=" button-bar ">
+            <button id="chumashJune102016-button9" class=" button button-light  button-block icon-left ion-android-arrow-back" ng-click="showPrevData()">Prev</button>
+            <button id="chumashJune102016-button11" class=" button button-light  button-block icon ion-android-calendar" ng-click="showDatePicker()"></button>
+            <button id="chumashJune102016-button14" class=" button button-light  button-block icon-right ion-android-arrow-forward" ng-click="showNextData()">Next</button>
+        </div>
+         -->
+        <div ng-class="font_size" ng-if="section == 'Tanya'">
+            <table  ng-repeat-start="textParent in textData" cellpadding="10" cellspacing="10" style="margin-bottom:10px;width:100%">
+                <tbody>
+                    <tr>
+                        <td width="43%" style="line-height:1.6;text-align:right">
+                            <span class="text-heb" dir="rtl" ng-bind-html="textParent.text_heb"></span>
+                        </td>
+                        <td width="4%"></td>
+                        <td width="43%" style="line-height:1.6;text-align:left">
+                            <span dir="ltr" ng-bind-html="textParent.text_eng"></span>
+                        </td>
+                    </tr>
+                    <tr ng-show="textParent.text_both">
+                        <td width="100%" style="line-height:1.6;">
+                            <span ng-bind-html="textParent.text_both"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table ng-show="textParent.children" ng-repeat="textChild in textParent.children" cellpadding="10" cellspacing="10" style="background-color:#ECE9D8;margin-bottom:10px;padding-bottom:10px;width:100%" ng-repeat-end>
+                <tbody>
+                    <tr>
+                        <td width="43%" style="line-height:1.6;padding-left:10px;">
+                            <span class="text-heb" ng-repeat-end dir="rtl" ng-bind-html="textChild.text_heb"></span>
+                        </td>
+                        <td width="4%"></td>
+                        <td width="43%" style="line-height:1.6;padding-right:10px;text-align:right">
+                            <span ng-repeat-end dir="ltr" ng-bind-html="textChild.text_eng"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-class="font_size" ng-if="section != 'Tanya'">
+            <table  ng-repeat-start="textParent in textData" cellpadding="10" cellspacing="10" style="margin-bottom:10px;width:100%">
+                <tbody>
+                    <tr>
+                        <td width="44%" style="line-height:1.6">
+                            <span ng-bind-html="textParent.text_eng"></span>
+                        </td>
+                        <td width="2%"></td>
+                        <td width="44%" style="line-height:1.6;text-align:right">
+                            <span class="text-heb" dir="rtl" ng-bind-html="textParent.text_heb"></span>
+                        </td>
+                    </tr>
+                    <tr ng-show="textParent.text_both">
+                        <td width="100%" style="line-height:1.6">
+                            <span ng-bind-html="textParent.text_both"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table ng-show="textParent.children" ng-repeat="textChild in textParent.children" cellpadding="10" cellspacing="10" style="background-color:#ECE9D8;margin-bottom:15px;padding-bottom:10px;width:100%" ng-repeat-end>
+                <tbody>
+                    <tr>
+                        <td width="44%" style="padding-left:10px;line-height:30px;">
+                            <span ng-bind-html="textChild.text_eng"></span>
+                        </td>
+                        <td width="2%"></td>
+                        <td width="44%" style="line-height:38px;padding-right:10px;text-align:right">
+                            <span class="text-heb" ng-repeat-end dir="rtl" ng-bind-html="textChild.text_heb">
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </ion-content>
+    <!-- Button Starts -->
+    <div class="float-button" ng-show="sttButton" ng-click="scrollToTop()">
+        <span class="height-fix">
+            <a class="content">
+                <i class="ion-ios-arrow-up"> </i>
+            </a>
+        </span>
+    </div>
+    <!-- Button Ends -->
+</ion-view>

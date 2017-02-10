@@ -1,0 +1,485 @@
+@font-face {
+    font-family: 'Taamey Frank';
+    src: url('../fonts/Taamey-Frank/TaameyFrankCLM-Medium.ttf');
+}
+@font-face {
+    font-family: 'Taamey Frank';
+    src: url('../fonts/Taamey-Frank/TaameyFrankCLM-Bold.ttf');
+    font-weight: bold;
+}
+@font-face {
+    font-family: 'Taamey Frank';
+    src: url('../fonts/Taamey-Frank/TaameyFrankCLM-MediumOblique.ttf');
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Taamey Frank';
+    src: url('../fonts/Taamey-Frank/TaameyFrankCLM-BoldOblique.ttf');
+    font-style: italic;
+    font-weight: bold;
+}
+@font-face {
+    font-family: 'Adobe Garamond';
+    src: url('../fonts/Taamey-Frank/AdobeGaramondProRegular.ttf');
+}
+.platform-ios .manual-ios-statusbar-padding{
+    padding-top:20px;
+}
+.manual-remove-top-padding{
+    padding-top:0px;
+}
+.manual-remove-top-padding .scroll{
+    padding-top:0px !important;
+}
+ion-list.manual-list-fullwidth div.list, .list.card.manual-card-fullwidth {
+    margin-left:-10px;
+    margin-right:-10px;
+}
+ion-list.manual-list-fullwidth div.list > .item, .list.card.manual-card-fullwidth > .item {
+    border-radius:0px;
+    border-left:0px;
+    border-right: 0px;
+}
+
+.font-size-small *{
+    font-size: 18px;
+    font-family: 'Adobe Garamond', 'Taamey Frank';
+}
+
+
+.font-size-medium *{
+    font-size: 22px;
+    font-family: 'Adobe Garamond', 'Taamey Frank';
+}
+
+.font-size-large *{
+    font-size: 32px;
+    font-family: 'Adobe Garamond', 'Taamey Frank';
+}
+
+em,i{
+    font-style:italic !important;
+}
+
+.font-size-small .parek{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+.font-size-medium .parek{
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.font-size-large .parek{
+    font-size: 34px;
+    font-weight: 600;
+}
+
+.font-size-small .text-heb{
+    font-size: 21px !important;
+    font-family: 'Taamey Frank' !important;
+}
+.font-size-small .text-heb *{
+    font-size: 21px !important;
+    font-family: 'Taamey Frank' !important;
+}
+
+.font-size-medium .text-heb{
+    font-size: 26px !important;
+    font-family: 'Taamey Frank' !important;
+}
+.font-size-medium .text-heb *{
+    font-size: 26px !important;
+    font-family: 'Taamey Frank' !important;
+}
+
+.font-size-large .text-heb{
+    font-size: 36px !important;
+    font-family: 'Taamey Frank' !important;
+}
+.font-size-large .text-heb *{
+    font-size: 36px !important;
+    font-family: 'Taamey Frank' !important;
+}
+.rashi_heading{
+    font-weight: 600;
+}
+
+.font-size-small .heb_small{
+    font-size: 14px !important;
+}
+
+.font-size-medium .heb_small{
+    font-size: 18px !important;
+}
+
+.font-size-large .heb_small{
+    font-size: 28px !important;
+}
+
+.font-size-small .heb_large{
+    font-size: 20px !important;
+}
+
+.font-size-medium .heb_large{
+    font-size: 26px !important;
+}
+
+.font-size-large .heb_large{
+    font-size: 36px !important;
+}
+
+.ionic_datepicker_popup .popup-body .selected_date_full {
+/*    background-color: #009fe3 !important;*/
+}
+.ionic_datepicker_popup .popup-buttons button {
+/*    background-color: #009fe3 !important;*/
+}
+
+.ionic_datepicker_popup .header, .ionic_datepicker_modal .footer {
+/*    background-color: #009fe3 !important;*/
+}
+
+.ionic_datepicker_popup .today {
+/*    border: 1px solid #009fe3 !important;*/
+}
+
+.ionic_datepicker_popup .selected_date {
+/*    background-color: #009fe3 !important;*/
+}
+.ionic_datepicker_popup .popup-body .show_nav .prev_btn_section {
+/*    color: #009fe3 !important;*/
+}
+
+.ionic_datepicker_popup .popup-body .show_nav .prev_btn_section button {
+/*    color: #009fe3 !important;*/
+}
+
+.ionic_datepicker_popup .popup-body .show_nav .next_btn_section {
+/*    color: #009fe3 !important;*/
+}
+
+.ionic_datepicker_popup .popup-body .show_nav .next_btn_section button {
+/*    color: #009fe3 !important;*/
+}
+
+.ionic_datepicker_popup .popup{
+    width: 90% !important;
+    height: 90% !important;
+}
+.ionic_datepicker_popup .popup-body{
+    height: 100% !important;
+}
+.ionic_datepicker_popup .popup .popup-buttons{
+    position: relative !important;
+    bottom: 0px !important;
+    width: 100% !important;
+}
+.ionic_datepicker_popup .popup-body .row .col{
+    padding: 9px 8px 9px 8px !important;
+}
+@media only screen and (device-width: 768px){
+    .ionic_datepicker_popup .popup{
+        width: 70% !important;
+        height: 80% !important;
+    }
+    .ionic_datepicker_popup .popup .popup-buttons{
+        position: relative !important;
+        bottom: 0px !important;
+        width: 100% !important;
+    }
+    .ionic_datepicker_popup .popup-body .row .col{
+        padding: 25px 10px 25px 10px !important;
+    }
+}
+.last-viewed-date{
+    font-size:12px;
+    color: gray;
+}
+
+h1.title{
+    font-size:12px !important;
+}
+
+h1{
+    font-size: 1.8em !important;
+    font-weight: 400 !important;
+}
+
+.font-size-small .text-heb h1{
+    font-size: 34px !important;
+    font-weight: 500 !important;
+}
+.font-size-medium .text-heb h1{
+    font-size: 38px !important;
+    font-weight: 500 !important;
+}
+.font-size-large .text-heb h1{
+    font-size: 44px !important;
+    font-weight: 500 !important;
+}
+
+.title-center{
+    font-size: 14px !important;
+}
+
+
+/* customizing header 2016-11-20 */
+.platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader){
+    height: 76px;
+}
+.platform-ios.platform-cordova:not(.fullscreen) .has-header, .platform-ios.platform-cordova:not(.fullscreen) .bar-subheader{
+    top: 76px;
+}
+.nav-bar-block, .bar {
+    background-color: inherit !important;
+}
+.bar .title{
+    height: 62px !important;
+    margin-top: 14px !important;
+}
+.page-label{
+    display: block;
+}
+.page-title{
+    font-size: 1.3em;
+}
+.weekly-page-title{
+    margin-top: 8px;
+}
+.page-date-title{
+    font-size : 0.9em;
+}
+
+.page-sub-title{
+    font-size : 1em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/*right button  */
+.bar .buttons-left{
+    margin-left: 6px !important;
+}
+.bar .buttons-right{
+    right: 26px !important;
+}
+
+.section-color{
+    display: block !important;
+    position: absolute !important;
+    left: 0px !important;
+    height: 100% !important;
+    bottom: auto !important;
+    top: 0px !important;
+    width: 6px !important;
+}
+/* end customizing header*/
+.ionic_datepicker_popup .popup{
+    border-radius: 10px;
+}
+.ionic_datepicker_popup .popup .popup-body{
+    padding: 0px;
+    border-radius: 10px;
+}
+.date_popup_title{
+    background-color: #F3F3F3;
+    text-align: center;
+    height: 60px;
+    font-size: 20px;
+    padding: 19px;
+    color: #A0A0A0;
+}
+.date_selected{
+    font-size: 20px;
+    color: #bad9b5;
+    font-weight: bold;
+    text-align: center;
+}
+.date_selected_parsha_title{
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+.ionic_datepicker_popup .popup-buttons .button_set{
+    border-radius: 0 0 10px 10px;
+    background-color: #f3f3f3;
+    color: #797979;
+    height: 70px;
+    font-size: 22px;
+    text-transform: uppercase;
+    height: 6em;
+    display: block !important;
+    width: 100%;
+}
+.ionic_datepicker_popup .popup .date_popup_title{
+    font-weight: bold;
+    color: #797979;
+}
+.ionic_datepicker_popup .popup .btn-close{
+    float: right;
+    color: #797979;
+    margin-right: 10px;
+}
+.popup .button_today{
+    /*display: none;*/
+}
+.popup .button_close{
+    display: none;
+}
+.ionic_datepicker_popup .popup .date_selection{
+    text-align: center;
+}
+.ionic_datepicker_popup .popup{
+    background-color: white;
+    text-align: center;
+}
+.ionic_datepicker_popup .popup .button_today{
+    background-color: #bad9b5;
+    color: white;
+    border-radius: 100px;
+    height: 2em;
+    width: 40%;
+    border: none;
+    bottom: 1.5em;
+    min-height: 30px !important;
+    max-height: 36px !important;
+}
+
+.ionic_datepicker_popup .popup .date_selection .calendar_grid .selected_date{
+    background-color: #bad9b5;
+    border-radius: 1px;
+}
+
+.ionic_datepicker_popup .popup .date_selection .calendar_grid .today{
+    border: 1px solid #bad9b5;
+    border-radius: 1px;
+}
+
+.ionic_datepicker_popup .popup .popup-buttons{
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+#page20 .bar.bar-positive{
+    border-color: #f8f8f8;
+    background-image: none;
+}
+
+#page20 .padding{
+    padding: 0px;
+}
+
+#page20 .padding .list{
+    border-top: solid 2px #dddddd;
+}
+
+#page20 .padding .list .item-content{
+    padding-right: 15px;
+}
+
+#page20 .bar.bar-positive{
+    border-color: #f8f8f8;
+    background-image: none;
+}
+#page21 .bar.bar-positive{
+    border-color: #f8f8f8;
+    background-image: none;
+}
+#page21 .padding{
+    padding: 0px;
+}
+#page20 .scroll-content{
+    background-color: #f8f8f8;
+}
+#page21 .scroll-content{
+    background-color: #f8f8f8;
+}
+
+#page20 .padding{
+    padding: 0px;
+}
+
+#page20 .padding .list{
+    border-top: solid 2px #dddddd;
+}
+
+#page20 .padding .list .item-content{
+    padding-right: 15px;
+}
+
+
+
+/* modal menu*/
+#modal_menu_list .list .item{
+    border-color: white;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+}
+#modal_menu_list .list .item-content{
+    background-color: #eaf2e9;
+}
+
+
+
+/*scroll-button*/
+/* Empty. Add your own CSS if you like */
+.float-button {
+    background-color:#bad9b5;
+    opacity: 0.9;
+    color: white;
+    border-radius: 50%;
+    /*border-radius:15% 0 0 0;*/
+    width: 30px;
+    padding: 25px;
+    font-size: 40px;
+    position: fixed;
+    bottom: 5%; /* Adjust height */
+    right: 5%; /* Adjust position */
+    z-index: 1000;
+}
+
+.float-button .height_fix {
+    margin-top: 100%;
+    border: 1px solid red;
+}
+
+.float-button .content {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    margin-top: -20px;
+    color: white;
+}
+
+.modal-backdrop-bg{
+    display: none;
+}
+.available-week{
+    background-color: #bad9b5;
+}
+@media only screen and (max-width: 360px){
+    body .ionic_datepicker_popup .popup-buttons .button_set{
+        height: 4em;
+    }
+}
+
+@media only screen and (max-width: 360px){
+    body .ionic_datepicker_popup .popup .button_today{
+        height: 2em;
+        bottom: 0.5em;
+    }
+}

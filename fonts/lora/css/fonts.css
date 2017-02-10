@@ -1,0 +1,44 @@
+@font-face {
+  font-family: 'Lora';
+  font-weight: 400;
+  font-style: normal;
+  src: local('Lora'),
+       local('Lora-regular'),
+       url('../fonts/Lora-regular/Lora-regular.woff2') format('woff2'),
+       url('../fonts/Lora-regular/Lora-regular.woff') format('woff'),
+       url('../fonts/Lora-regular/Lora-regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-weight: 700;
+  font-style: normal;
+  src: local('Lora Bold'),
+       local('Lora-700'),
+       url('../fonts/Lora-700/Lora-700.woff2') format('woff2'),
+       url('../fonts/Lora-700/Lora-700.woff') format('woff'),
+       url('../fonts/Lora-700/Lora-700.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-weight: 400;
+  font-style: italic;
+  src: local('Lora Italic'),
+       local('Lora-italic'),
+       url('../fonts/Lora-italic/Lora-italic.woff2') format('woff2'),
+       url('../fonts/Lora-italic/Lora-italic.woff') format('woff'),
+       url('../fonts/Lora-italic/Lora-italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-weight: 700;
+  font-style: italic;
+  src: local('Lora Bold Italic'),
+       local('Lora-700italic'),
+       url('../fonts/Lora-700italic/Lora-700italic.woff2') format('woff2'),
+       url('../fonts/Lora-700italic/Lora-700italic.woff') format('woff'),
+       url('../fonts/Lora-700italic/Lora-700italic.ttf') format('truetype');
+}
+
