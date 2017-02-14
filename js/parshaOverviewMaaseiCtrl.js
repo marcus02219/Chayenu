@@ -1,9 +1,9 @@
 angular.module('app.controllers')
     .controller('parshaOverviewMaaseiCtrl',
         function($scope, $ionicScrollDelegate, $ionicModal, $rootScope, SectionService, $state, TextService, ParshaService, $ionicLoading, ionicDatePicker, $ionicHistory) {
-            if (window.localStorage['selected_default_section'] == undefined) {
-                $state.go('menu.default_settings');
-            }
+//            if (window.localStorage['selected_default_section'] == undefined) {
+//                $state.go('menu.default_settings');
+//            }
             $scope.selectedItem = window.localStorage['selected_font_size'] || "small";
             $rootScope.font_size = "font-size-" + $scope.selectedItem;
             $scope.disable_days = [];

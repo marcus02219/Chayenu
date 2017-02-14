@@ -14,14 +14,67 @@
                 About
                 <i class="ion-chevron-right" style="float:right;color: #dddddd;"></i>
             </ion-item>
-            <ion-item ui-sref="menu.font_size()" menu-close="" class="">
-                Text Size
-                <i class="ion-chevron-right" style="float:right;color: #dddddd;"></i>
-            </ion-item>
-            <ion-item ui-sref="menu.default_settings()" menu-close="" class="">
-                Default Settings
-                <i class="ion-chevron-right" style="float:right;color: #dddddd;"></i>
-            </ion-item>
+            
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Text Size
+                </div>
+                <select  ng-model="selectedFontsize" ng-change="updateFontsize(selectedFontsize)">
+                    <option ng-repeat="item in font_sizes" ng-selected="selectedFontsize == item.value" value="{{item.value}}">{{item.label}}</option>
+                </select>
+            </label>
+            
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    When opening
+                    <br/>
+                    app to go
+                </div>
+                <select  ng-model="sectionType" ng-change="updateSectionType(sectionType)">
+                    <option ng-selected="selectedSectionType == 'specific_section'" value="specific_section">SpecificSection</option>
+                    <option ng-selected="selectedSectionType == 'left_off'" value="left_off">Where I left off</option>
+                    <option ng-selected="selectedSectionType == 'section_picker'" value="section_picker">Section picker</option>
+                </select>
+            </label>
+            
+            <label class="item item-input item-select" ng-show="isSpecificSection">
+                <div class="input-label" style="font-size:12px;">
+                    Selected Section
+                </div>
+                <select ng-model="selectedSection" ng-change="updateSectionID(selectedSection)">
+                    <option ng-repeat="item in sections" ng-selected="selectedSectionID == item.value" value="{{item.value}}***{{item.label}}***{{item.color}}">{{item.label}}</option>
+                </select>
+            </label>
+            
+            <div ng-show="isSectionPicker">
+                <label class="item item-input">
+                    <div class="input-label" style="font-size:12px;">
+                        Selected Section
+                    </div>
+                    <div style="font-size:12px;">
+                        {{selectedItemLabel}}
+                    </div>
+                </label>
+            </div>
+            
+            <ion-list ng-show="isSectionPicker" ng-model="selectedSection">
+                <ion-item ng-repeat="item in sections" ng-selected="selectedSectionID == item.value" value="{{item.value}}" ng-click="updateSectionID(item.value+'***'+item.label+'***'+item.color)" style="font-size:12px;padding-left:40px;">
+                    {{item.label}}
+                </ion-item>
+            </ion-list>
+            
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    When opening
+                    <br/>
+                    a section go to
+                </div>
+                <select  ng-model="dateType" ng-change="updateDateType(dateType)">
+                    <option ng-selected="selectedDateType == 'today'" value="today">Today</option>
+                    <option ng-selected="selectedDateType == 'left_off'" value="left_off">Where I left off</option>
+                </select>
+            </label>
+
         </ion-list>
     </ion-content>
 </ion-view>
