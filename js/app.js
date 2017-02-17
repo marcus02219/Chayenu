@@ -13,21 +13,21 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
   }, false);
 
   $ionicPlatform.ready(function() {
-   if(ApiService.checkConnection() == true){
-        DBHelperService.createTables().then(function(result){
-          $ionicLoading.show({
-            template: 'Syncing data...'
-          });
-
-          ApiService.initApi("2016-08-14T19:14:06+00:00", "fetch").then(function(result){
-            debugger;
-            $rootScope.$broadcast("syncing-complete");
-            $ionicLoading.hide();
-          });
-        })
-   }else{
+//   if(ApiService.checkConnection() == true){
+//        DBHelperService.createTables().then(function(result){
+//          $ionicLoading.show({
+//            template: 'Syncing data...'
+//          });
+//
+//          ApiService.initApi("2016-08-14T19:14:06+00:00", "fetch").then(function(result){
+//            debugger;
+//            $rootScope.$broadcast("syncing-complete");
+//            $ionicLoading.hide();
+//          });
+//        })
+//   }else{
        $rootScope.$broadcast("syncing-complete");
-   }
+//   }
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     var dateFormat = function () {

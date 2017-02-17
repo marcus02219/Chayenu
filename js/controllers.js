@@ -219,6 +219,8 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
                 .then(function(result) {
                     stdt = new Date(result[0].start_date);
                     eddt = new Date(result[0].end_date);
+                      console.log('stdt----->' + stdt);
+                      console.log('eddt----->' + eddt);
                     $rootScope.st_date = stdt;
                     $rootScope.ed_date = eddt;
                     for (var i = 0; i < result.length; i++) {
@@ -251,8 +253,10 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
 
                     var tmp_root_ed_dt = angular.copy($rootScope.ed_date);
                     $rootScope.ed_date.setDate(tmp_root_ed_dt.getDate() + DATE_OFFSET);
-
+                    
+                    
                     var available_date = angular.copy($rootScope.st_date)
+                    available_date.setHours(0);
                     var available = false;
                     var disable_days = [];
 
@@ -260,7 +264,9 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
                         for (i = 0; i < parsha_days.length; i++) {
                             day_item = angular.copy(parsha_days[i]);
                             day_item[1].setDate(day_item[1].getDate() + DATE_OFFSET);
+                            day_item[1].setHours(0);
                             day_item[0].setDate(day_item[0].getDate() + DATE_OFFSET);
+                            day_item[0].setHours(0);
                             if (day_item[1] >= available_date && available_date >= day_item[0]) {
                                 available = true;
                                 break;
@@ -268,6 +274,8 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
                         }
 
                         if (available == false) {
+                              console.log("disable_date ----->" + available_date);
+                              console.log("tmp_root_ed_dt ----->" + tmp_root_ed_dt);
                             disable_days.push(angular.copy(available_date));
                         }
                         available = false;
@@ -487,6 +495,8 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
                 .then(function(result) {
                     stdt = new Date(result[0].start_date);
                     eddt = new Date(result[0].end_date);
+                    console.log('stdt----->' + stdt);
+                    console.log('eddt----->' + eddt);
                     $rootScope.st_date = stdt;
                     $rootScope.ed_date = eddt;
                     for (var i = 0; i < result.length; i++) {
@@ -527,7 +537,8 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
                     var tmp_root_ed_dt = angular.copy($rootScope.ed_date);
                     $rootScope.ed_date.setDate(tmp_root_ed_dt.getDate() + DATE_OFFSET);
 
-                    var available_date = angular.copy($rootScope.st_date)
+                    var available_date = angular.copy($rootScope.st_date);
+                    available_date.setHours(0);
                     var available = false;
                     var disable_days = [];
 
@@ -535,14 +546,16 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
                         for (i = 0; i < $scope.parsha_days.length; i++) {
                             day_item = angular.copy($scope.parsha_days[i]);
                             day_item[1].setDate(day_item[1].getDate() + DATE_OFFSET);
+                            day_item[1].setHours(0);
                             day_item[0].setDate(day_item[0].getDate() + DATE_OFFSET);
+                            day_item[0].setHours(0);
                             if (day_item[1] >= available_date && available_date >= day_item[0]) {
                                 available = true;
                                 break;
                             }
                         }
 
-                        if (available == false) {
+                        if (available == false && available_date != $rootScope.st_date && available_date != $rootScope.ed_date) {
                             disable_days.push(angular.copy(available_date));
                         }
                         available = false;

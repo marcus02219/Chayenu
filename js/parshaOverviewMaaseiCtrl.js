@@ -248,7 +248,7 @@ angular.module('app.controllers')
                 if(selectedSectionType == "left_off" || selectedSectionType == undefined){
                     section_id          = window.localStorage["last_section_id"] || $scope.sectionData[0].ID;
                     section_title       = window.localStorage["last_section_title"] || $scope.sectionData[0].title;
-                    $scope.sectionColor = window.localStorage['last_section_color'] || "#da2b40";
+                    $scope.sectionColor = window.localStorage["last_section_color"] || $scope.sectionData[0].color;
                 }else{
                     section_id          = selectedItem;
                     section_title       = selectedItemLabel;
@@ -323,7 +323,8 @@ angular.module('app.controllers')
                         var tmp_root_ed_dt = angular.copy($rootScope.ed_date);
                         $rootScope.ed_date.setDate(tmp_root_ed_dt.getDate() + DATE_OFFSET);
 
-                        var available_date = angular.copy($rootScope.st_date)
+                        var available_date = angular.copy($rootScope.st_date);
+                        available_date.setHours(0);
                         var available = false;
                         var disable_days = [];
 
@@ -331,7 +332,9 @@ angular.module('app.controllers')
                             for (i = 0; i < parsha_days.length; i++) {
                                 day_item = angular.copy(parsha_days[i]);
                                 day_item[1].setDate(day_item[1].getDate() + DATE_OFFSET);
+                                day_item[1].setHours(0);
                                 day_item[0].setDate(day_item[0].getDate() + DATE_OFFSET);
+                                day_item[0].setHours(0);
 
                                 if (day_item[1] >= available_date && available_date >= day_item[0]) {
                                     available = true;
