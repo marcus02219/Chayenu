@@ -49,35 +49,72 @@
         </div>
     </div>
   
-    <!--script id="sidemenu.html" type="text/ng-template">
-        <div class="menu menu-left">
-            <ion-content ng-controller="MenuCtrl">
-                <ion-item>
-                    <div class="menu-title" style="text-align:center;height:58px;padding-top:20px;font-size:24px;">
-                        Chayenu
-                        <div class="button-clear" ng-click="closeModalMenu()" style="float:right;"><span class="icon ion-close"></span></div>
+    <script id="intro.html" type="text/ng-template">
+        <div class="intro-modal-content">
+            <ion-content ng-controller="parshaOverviewMaaseiCtrl">
+                <div class="intro-modal">
+                    <div class="button-clear" ng-click="closeModalMenu()" style="float:right;margin-top:0px;"><span class="icon ion-close"></span></div>
+                    <div class="first-item">
+                    <label style="text-align:center;">Welcome to the new</label>
+                    <h1 style="margin-top:5px;padding-top:5px;">Chayenu App</h1>
                     </div>
-                </ion-item>
-                <ion-list id="modal_menu_list" class=" ">
-                    <span ng-repeat="row in sectionData" ng-if="row.weekly==0" id="menu-list-item1">
-                        <ion-item  ng-click="closeModal('menu.chumashJune102016', {section_name: '{{row.title}}', section_color: '{{row.color}}', section_id: '{{row.ID}}', day: '{{(row.date) || todays_date}}'})" ui-sref="#">
-                            <label class="section-color" ng-style="{'background-color': row.color}"></label>
-                            {{row.title}}
-                        </ion-item>
-                    </span>
-                    <br/>
-                    <span ng-repeat="row in sectionData" ng-if="row.weekly == 1"  id="menu-list-item1">
-                        <ion-item  ng-click="closeModal('menu.weekly',{section_name: '{{row.title}}', section_color: '{{row.color}}', section_id: '{{row.ID}}', day: '{{(row.date) || todays_date}}'})" ui-sref="#">
-                        <label class="section-color" ng-style="{'background-color': row.color}"></label>
-                        {{row.title}}
-                        </ion-item>
-                    </span>
-                    <ion-item ng-click="closeModalMenu()" class="item-icon-left" menu-close ui-sref="menu.setting"><i class="icon ion-android-settings"></i>Settings</ion-item>
-                
-                </ion-list>
+
+                    <div>
+                    <label>Designed to be instantly immersive, taking<br/>you directoy to your daily learning.</label>
+                    </div>
+
+                    <div>
+                    <label>Enjoy all the content free until March 15th.</label>
+                    <small class="gray-text">*if you don't want to upgrade then, don't worry, some content will always be free.</small>
+                    </div>
+
+                    <div>
+                    <label>Fell free to leave us some feedback to help us improve your experience.</label>
+                    </div>
+
+                    <div>
+                    <label class="gray-text">-Chayenu Digital Team</label>
+                    </div>
+
+                    <div>
+                    <a href="mailto:digital@chayenu.org" class="button button-medium button-dark" style="border-radius:30px;width:50%;">CONTACT US</a>
+                    </div>
+                    <button class="button button-full button-positive" ng-click="closeModalMenu()">BAKC TO YOUR STUDIES</button>
+
+                </div>
             </ion-content>
-        
         </div>
-    </script-->
+    </script>
+    <!--script id="sidemenu.html" type="text/ng-template">
+     <div class="menu menu-left">
+     <ion-content ng-controller="MenuCtrl">
+     <ion-item>
+     <div class="menu-title" style="text-align:center;height:58px;padding-top:20px;font-size:24px;">
+     Chayenu
+     <div class="button-clear" ng-click="closeModalMenu()" style="float:right;"><span class="icon ion-close"></span></div>
+     </div>
+     </ion-item>
+     <ion-list id="modal_menu_list" class=" ">
+     <span ng-repeat="row in sectionData" ng-if="row.weekly==0" id="menu-list-item1">
+     <ion-item  ng-click="closeModal('menu.chumashJune102016', {section_name: '{{row.title}}', section_color: '{{row.color}}', section_id: '{{row.ID}}', day: '{{(row.date) || todays_date}}'})" ui-sref="#">
+     <label class="section-color" ng-style="{'background-color': row.color}"></label>
+     {{row.title}}
+     </ion-item>
+     </span>
+     <br/>
+     <span ng-repeat="row in sectionData" ng-if="row.weekly == 1"  id="menu-list-item1">
+     <ion-item  ng-click="closeModal('menu.weekly',{section_name: '{{row.title}}', section_color: '{{row.color}}', section_id: '{{row.ID}}', day: '{{(row.date) || todays_date}}'})" ui-sref="#">
+     <label class="section-color" ng-style="{'background-color': row.color}"></label>
+     {{row.title}}
+     </ion-item>
+     </span>
+     <ion-item ng-click="closeModalMenu()" class="item-icon-left" menu-close ui-sref="menu.setting"><i class="icon ion-android-settings"></i>Settings</ion-item>
+     
+     </ion-list>
+     </ion-content>
+     
+     </div>
+     </script-->
+
   </body>
 </html>

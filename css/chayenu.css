@@ -22,6 +22,21 @@
     font-family: 'Adobe Garamond';
     src: url('../fonts/Taamey-Frank/AdobeGaramondProRegular.ttf');
 }
+@font-face {
+    font-family: 'SF-Regular';
+    src: url('../fonts/sf/SFText-Regular.otf');
+}
+
+@font-face {
+    font-family: 'SF-Medium';
+    src: url('../fonts/sf/SFText-Medium.otf');
+}
+
+@font-face {
+    font-family: 'SF-Bold';
+    src: url('../fonts/sf/SFText-Bold.otf');
+}
+
 .platform-ios .manual-ios-statusbar-padding{
     padding-top:20px;
 }
@@ -244,16 +259,20 @@ h1{
     display: block;
 }
 .page-title{
+    font-family:'SF-Bold';
     font-size: 1.3em;
 }
 .weekly-page-title{
+    font-family:'SF-Bold';
     margin-top: 8px;
 }
 .page-date-title{
+    font-family:'SF-Medium';
     font-size : 0.9em;
 }
 
 .page-sub-title{
+    font-family:'SF-Bold';
     font-size : 1em;
     text-transform: uppercase;
     font-weight: 600;
@@ -482,4 +501,35 @@ h1{
         height: 2em;
         bottom: 0.5em;
     }
+}
+.intro-modal-content{
+    position: absolute;
+    z-index: 999999;
+    overflow: hidden;
+    min-height: 100%;
+    max-height: 100%;
+    width: 98%;
+    height: 98%;
+    background-color: #fff;
+    left:1%;
+    top:1%;
+}
+
+.intro-modal{
+    padding-top: 20px;
+}
+.intro-modal div{
+    text-align:center;
+    margin-top: 10%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.intro-modal div label{
+    display: block;
+}
+.intro-modal div .gray-text{
+    color: gray;
+}
+.intro-modal .first-item{
+    padding-top: 5%;
 }

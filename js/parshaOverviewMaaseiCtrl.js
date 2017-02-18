@@ -12,18 +12,14 @@ angular.module('app.controllers')
             $scope.sttButton = false;
             $scope.sectionCopyright = window.localStorage['last_section_copyright'];
 
-            $rootScope.hashtag = function() {
-                if ($rootScope.modal == undefined) {
-                    $ionicModal.fromTemplateUrl('sidemenu.html', {
-                        scope: $rootScope,
-                        animation: 'slide-in-up',
-                        focusFirstInput: true
-                    }).then(function(modal) {
-                        $rootScope.modal = modal;
-                        $rootScope.modal.show();
-                    });
-                }
-            };
+            if ($rootScope.modal == undefined) {
+                $ionicModal.fromTemplateUrl('intro.html', {
+                    scope: $rootScope,
+                    animation: 'slide-in-up'
+                }).then(function(modal) {
+                    $rootScope.modal = modal;
+                });
+            }
 
             $rootScope.openModal = function() {
                 $rootScope.modal.show();
@@ -164,7 +160,16 @@ angular.module('app.controllers')
 
                 });
             });
-
+            $scope.openCopyright = function() {
+                var html = $scope.sectionCopyright;
+                //        var link = html.split('=')[1].split('>')[0].split('"')[1]
+                var link = html.split('="')[1].split('">')[0];
+                window.open(link, '_blank');
+            };
+            $scope.opneMailbox = function(){
+                console.log('test mail');
+                window.open(link, '_blank');
+            }
             $scope.showDatePicker = function() {
                 var selected_date = angular.copy($scope.selected_date);
                 var ipObj1 = {
@@ -354,6 +359,11 @@ angular.module('app.controllers')
                             $scope.textData = result;
                             $ionicLoading.hide();
                         });
+                          if(window.localStorage['first_loaded_app_version'] != 1.0){
+                              $rootScope.modal.show();
+                              window.localStorage['first_loaded_app_version'] = 1.0;
+                          }
+                      
                     });
 
             }
