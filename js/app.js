@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services', 'app.directives', 'db_starter'])
+angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services', 'app.directives', 'db_starter', 'ngCordova'])
 
 .run(['$ionicPlatform', '$rootScope', '$timeout', 'DBHelperService', '$ionicLoading', 'ApiService', '$window', function($ionicPlatform, $rootScope, $timeout, DBHelperService, $ionicLoading, ApiService, $window) {
   document.addEventListener("deviceready", function(){
@@ -13,21 +13,21 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
   }, false);
 
   $ionicPlatform.ready(function() {
-//   if(ApiService.checkConnection() == true){
-//        DBHelperService.createTables().then(function(result){
-//          $ionicLoading.show({
-//            template: 'Syncing data...'
-//          });
-//
-//          ApiService.initApi("2016-08-14T19:14:06+00:00", "fetch").then(function(result){
-//            debugger;
-//            $rootScope.$broadcast("syncing-complete");
-//            $ionicLoading.hide();
-//          });
-//        })
-//   }else{
+   if(ApiService.checkConnection() == true){
+        DBHelperService.createTables().then(function(result){
+          $ionicLoading.show({
+            template: 'Syncing data...'
+          });
+
+          ApiService.initApi("2016-08-14T19:14:06+00:00", "fetch").then(function(result){
+            debugger;
+            $rootScope.$broadcast("syncing-complete");
+            $ionicLoading.hide();
+          });
+        })
+   }else{
        $rootScope.$broadcast("syncing-complete");
-//   }
+   }
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     var dateFormat = function () {

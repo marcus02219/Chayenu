@@ -48,6 +48,9 @@
             </table>
             
         </div>
+        <div class="copyright" style="text-align:center;margin-buttom:20px;">
+            <a href="#" ng-click="openCopyright()">(c) {{sectionCopyright_text}}</a>
+        </div>
         <div id="chumashJune102016-button-bar12" class=" button-bar " ng-show="loaded">
             <button id="chumashJune102016-button9" class=" button button-light  button-block icon-left ion-android-arrow-back" ng-click="showPrevData()">Prev</button>
             <!--    <button id="chumashJune102016-button11" class=" button button-light  button-block icon ion-android-calendar" ng-click="showDatePicker()"></button>
@@ -55,12 +58,12 @@
         </div>
     </ion-content>
     <!-- Button Starts -->
-    <div class="float-button" ng-show="sttButton" ng-click="scrollToTop()">
-        <span class="height-fix">
-            <a class="content">
-                <i class="ion-ios-arrow-up"> </i>
-            </a>
-        </span>
-    </div>
+<!--    <div class="float-button" ng-show="sttButton" ng-click="scrollToTop()">-->
+<!--        <span class="height-fix">-->
+<!--            <a class="content">-->
+<!--                <i class="ion-ios-arrow-up"> </i>-->
+<!--            </a>-->
+<!--        </span>-->
+<!--    </div>-->
     <!-- Button Ends -->
 </ion-view>

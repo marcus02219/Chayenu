@@ -11,7 +11,8 @@ angular.module('app.controllers')
         $scope.parsha_title = $rootScope["section_" + section_id + "_selected_parsha_title"];
         $scope.section = window.localStorage['last_section_title'];
         $scope.sectionColor = window.localStorage['last_section_color'];
-
+        $scope.sectionCopyright = window.localStorage['last_section_copyright'];
+        
         $scope.$on('syncing-complete', function(event, args) {
             bindTextData();
         });
@@ -95,6 +96,12 @@ angular.module('app.controllers')
             //            }
             //        }); //apply
         };
+            $scope.openCopyright = function() {
+            var html = $scope.sectionCopyright;
+            //        var link = html.split('=')[1].split('>')[0].split('"')[1]
+            var link = html.split('||')[0];
+            window.open(link, '_blank');
+            };
 
         $scope.showPrevData = function() {
             if ($scope.weekly_index == 0) {
@@ -176,13 +183,65 @@ angular.module('app.controllers')
         function bindTextData() {
             $ionicScrollDelegate.scrollTop(true);
             $scope.sttButton = false;
-            $scope.loaded = false;
             $ionicLoading.show({
                 template: '<ion-spinner icon="ios"></ion-spinner>'
             });
             var parsha_id = 0;
-            var selected_dt = $scope.selected_date;
-            $scope.parsha_days = [];
+            //            var section_id = $scope.sectionData[0].ID;
+            
+            
+            
+            var selectedSectionType = window.localStorage['selected_default_section_type'];
+            var selectedDateType    = window.localStorage['selected_default_date_type'];
+            
+            var selectedItem        = window.localStorage['selected_default_section'];
+            var selectedItemLabel   = window.localStorage['selected_default_section_label'];
+            var selectedColor       = window.localStorage['selected_default_section_color'];
+            var section_id          = 0;
+            var section_title       = "";
+            
+            if(selectedSectionType == "left_off" || selectedSectionType == undefined){
+                section_id          = window.localStorage["last_section_id"] || $scope.sectionData[0].ID;
+                section_title       = window.localStorage["last_section_title"] || $scope.sectionData[0].title;
+                $scope.sectionColor = window.localStorage["last_section_color"] || $scope.sectionData[0].color;
+            }else{
+                section_id          = selectedItem;
+                section_title       = selectedItemLabel;
+                $scope.sectionColor = selectedColor;
+            }
+            
+            if(window.localStorage['last_section_copyright'] == undefined){
+                $scope.sectionCopyright_text = $scope.sectionData[0].copyright.split("||")[1];
+            }else{
+                $scope.sectionCopyright_text = window.localStorage['last_section_copyright'].split("||")[1];
+            }
+            
+            $scope.parsha_title = window.localStorage["section_" + section_id + "_selected_parsha_title"];
+            
+            console.log('xxxxxxx' + window.localStorage["section_" + section_id + "_selected_parsha_title"])
+            
+            var dd = new Date().format("dddd, mmm, d'th', yyyy");
+            var date = window.localStorage["section_" + section_id] || dd
+            
+            if(selectedDateType == "today"){
+            date = dd;
+            }
+            
+            
+            var parsha_days = [];
+            
+            var mini_date = new Date(MIN_DATE);
+            var stored_date = new Date(date.replace('th,', ','));
+            if (stored_date < mini_date) {
+            date = mini_date.format("dddd, mmm, d'th', yyyy");
+            }
+            
+            $scope.date         = date;
+            $scope.section_id   = section_id;
+            $scope.section      = section_title;
+            $scope.selected_date= new Date(stored_date);
+            
+            var selected_dt = new Date($scope.date.replace('th,', ','));
 
             ParshaService.getData(selected_dt)
                 .then(function(result) {
@@ -259,8 +318,12 @@ angular.module('app.controllers')
                     TextService.getData(parsha_id, section_id, $scope.date).then(function(result) {
                         $scope.textData = result;
                         $ionicLoading.hide();
-                        $scope.loaded = true;
-                    });
+                         if(result.length > 10){
+                             $scope.loaded = true;
+                         }else{
+                             $scope.loaded = false;
+                         }
+                     });
                 });
 
         }

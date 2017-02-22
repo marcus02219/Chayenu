@@ -36,11 +36,12 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
         window.localStorage['last_section_weekly'] = 0;
         window.localStorage['last_section_color'] = $stateParams['section_color'];
         window.localStorage['last_section_copyright'] = $stateParams['section_copyright'];
-
+                console.log("------------->"+window.localStorage['last_section_copyright']);
         $scope.section = $stateParams['section_name'];
         $scope.sectionColor = $stateParams['section_color'];
         $scope.sectionCopyright = window.localStorage['last_section_copyright'];
-
+        $scope.sectionCopyright_text = $scope.sectionCopyright.split("||")[1];
+                
         var parsha_id = +window.localStorage['parsha_id'];
         var section_id = +$stateParams['section_id'];
 
@@ -56,7 +57,7 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
         $scope.openCopyright = function() {
             var html = $scope.sectionCopyright;
             //        var link = html.split('=')[1].split('>')[0].split('"')[1]
-            var link = html.split('="')[1].split('">')[0];
+            var link = html.split('||')[0];
             window.open(link, '_blank');
         };
 
@@ -206,6 +207,7 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
         function bindTextData() {
             $ionicScrollDelegate.scrollTop(true);
             $scope.sttButton = false;
+            $scope.loaded = false;
 
             $ionicLoading.show({
                 template: '<ion-spinner icon="ios"></ion-spinner>'
@@ -285,6 +287,11 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
                     $scope.disable_days = disable_days;
                     TextService.getData(parsha_id, section_id, selected_dt).then(function(result) {
                         $scope.textData = result;
+                         if(result.length > 10){
+                             $scope.loaded = true;
+                         }else{
+                             $scope.loaded = false;
+                         }
                         $ionicLoading.hide();
                     });
                 });
@@ -310,11 +317,14 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
         window.localStorage['last_section_id'] = $stateParams['section_id'];
         window.localStorage['last_section_title'] = $stateParams['section_name'];
         window.localStorage['last_section_weekly'] = 1;
-
+        window.localStorage['last_section_color'] = $stateParams['section_color'];
+        window.localStorage['last_section_copyright'] = $stateParams['section_copyright'];
+                
         $scope.parsha_title = $rootScope["section_" + section_id + "_selected_parsha_title"];
         $scope.sectionColor = $stateParams['section_color'];
         window.localStorage['last_section_color'] = $stateParams['section_color'];
-
+        $scope.sectionCopyright = window.localStorage['last_section_copyright'];
+        $scope.sectionCopyright_text = $scope.sectionCopyright.split("||")[1];
         $scope.$on('syncing-complete', function(event, args) {
             bindTextData();
         });
@@ -370,6 +380,13 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
         $ionicHistory.nextViewOptions({
             disableBack: true
         });
+        $scope.openCopyright = function() {
+        var html = $scope.sectionCopyright;
+        //        var link = html.split('=')[1].split('>')[0].split('"')[1]
+        var link = html.split('||')[0];
+        window.open(link, '_blank');
+        };
+
 
         var cur_poss = 0;
         var last_poss = 0;
@@ -586,7 +603,12 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
                     TextService.getData(parsha_id, section_id, $scope.date).then(function(result) {
                         $scope.textData = result;
                         $ionicLoading.hide();
-                        $scope.loaded = true;
+                         if(result.length > 10){
+                             $scope.loaded = true;
+                         }else{
+                             $scope.loaded = false;
+                         }
+                        
                     });
                 });
 
@@ -597,11 +619,11 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
         $rootScope.font_size = "font-size-" + $scope.selectedItem;
         $scope.sections = [];
         $scope.selectedFontsize     = window.localStorage['selected_font_size'] || "small"
-        $scope.selectedSectionID    = window.localStorage['selected_default_section'];
-        $scope.selectedSectionType  = window.localStorage['selected_default_section_type'] || "left_off";
+        $scope.selectedSectionType = window.localStorage['selected_default_section_type'] || "specific_section";
         $scope.selectedDateType     = window.localStorage['selected_default_date_type'] || "today";
         $scope.selectedItemLabel    = window.localStorage['selected_default_section_label'];
-        
+        $scope.selectedSectionID    = window.localStorage['selected_default_section'] || 1;
+                
         $scope.isSpecificSection = false;
         $scope.isSectionPicker = false;
         
@@ -623,7 +645,21 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
             value: "large",
             label: "Large"
         }];
-
+                
+        $scope.specific_section_options = [{
+            value: "specific_section",label: "SpecificSection"
+            }, {
+            value: "left_off", label: "Where I left off"
+            }, {
+            value: "section_picker",label: "Section picker"
+        }];
+        $scope.selected_date_type_options = [
+            {
+                value: "today",label: "Today"
+            },
+            {
+                value: "left_off", label: "Where I left off"
+            }];
         $scope.updateFontsize = function(font_size) {
             $rootScope.font_size                        = "font-size-" + font_size;
             $scope.selectedFontsize                     = font_size;
@@ -703,83 +739,83 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
 
     })
     .controller('defaultSettingsCtrl', function($scope, $rootScope, $state, SectionService, $ionicHistory) {
-        $scope.sections = [];
-        $scope.selectedItem = window.localStorage['selected_default_section'];
-        $scope.selectedSectionType = window.localStorage['selected_default_section_type'] || "left_off";
-        $scope.selectedDateType = window.localStorage['selected_default_date_type'] || "today";
-        $scope.selectedItemLabel = window.localStorage['selected_default_section_label'];
-
-        $scope.isSpecificSection = false;
-        $scope.isSectionPicker = false;
-
-        if ($scope.selectedSectionType == "specific_section") {
-            $scope.isSpecificSection = true;
-        }
-        if ($scope.selectedSectionType == "section_picker") {
-            $scope.isSectionPicker = true;
-        }
-
-        $scope.updateSectionType = function(section_type) {
-            window.localStorage['selected_default_section_type'] = section_type;
-            $scope.selectedDateType = section_type;
-
-            if (section_type == "specific_section") {
-                $scope.isSpecificSection = true;
-            } else {
-                $scope.isSpecificSection = false;
-            }
-
-            if (section_type == "section_picker") {
-                $scope.isSectionPicker = true;
-            } else {
-                $scope.isSectionPicker = false;
-            }
-
-        }
-
-        $scope.updateDateType = function(date_type) {
-            window.localStorage['selected_default_date_type'] = date_type;
-            $scope.selectedDateType = date_type;
-        }
-
-        $scope.update = function(section) {
-            console.log('selected_section----->' + section);
-            section_id = section.split('***')[0];
-            label = section.split('***')[1];
-            section_color = section.split('***')[2];
-            window.localStorage['selected_default_section'] = section_id;
-            window.localStorage['selected_default_section_label'] = label;
-            window.localStorage['selected_default_section_color'] = section_color;
-            $scope.selectedItem = section_id;
-            $scope.selectedItemLabel = label;
-        }
-
-        $scope.$on('syncing-complete', function(event, args) {
-            bindSectionData();
-            debugger;
-        });
-
-        bindSectionData();
-
-        function bindSectionData() {
-            SectionService.getData().then(function(sresult) {
-                for (var i = 0; i < sresult.length; i++) {
-                    option = {
-                        value: sresult[i]['ID'],
-                        label: sresult[i]['title'],
-                        color: sresult[i]['color']
-                    };
-                    $scope.sections.push(option);
-                }
-
-            });
-        }
-
-        $scope.goBack = function() {
-            $ionicHistory.nextViewOptions({
-                disableBack: true
-            });
-            $state.go('menu.setting');
-        };
-
+//        $scope.sections = [];
+//        $scope.selectedItem = window.localStorage['selected_default_section'];
+//        $scope.selectedSectionType = window.localStorage['selected_default_section_type'] || "specific_section";
+//        $scope.selectedDateType = window.localStorage['selected_default_date_type'] || "today";
+//        $scope.selectedItemLabel = window.localStorage['selected_default_section_label'];
+//
+//        $scope.isSpecificSection = false;
+//        $scope.isSectionPicker = false;
+//                
+//        if ($scope.selectedSectionType == "specific_section") {
+//            $scope.isSpecificSection = true;
+//        }
+//        if ($scope.selectedSectionType == "section_picker") {
+//            $scope.isSectionPicker = true;
+//        }
+//
+//        $scope.updateSectionType = function(section_type) {
+//            window.localStorage['selected_default_section_type'] = section_type;
+//            $scope.selectedDateType = section_type;
+//
+//            if (section_type == "specific_section") {
+//                $scope.isSpecificSection = true;
+//            } else {
+//                $scope.isSpecificSection = false;
+//            }
+//
+//            if (section_type == "section_picker") {
+//                $scope.isSectionPicker = true;
+//            } else {
+//                $scope.isSectionPicker = false;
+//            }
+//
+//        }
+//
+//        $scope.updateDateType = function(date_type) {
+//            window.localStorage['selected_default_date_type'] = date_type;
+//            $scope.selectedDateType = date_type;
+//        }
+//
+//        $scope.update = function(section) {
+//            console.log('selected_section----->' + section);
+//            section_id = section.split('***')[0];
+//            label = section.split('***')[1];
+//            section_color = section.split('***')[2];
+//            window.localStorage['selected_default_section'] = section_id;
+//            window.localStorage['selected_default_section_label'] = label;
+//            window.localStorage['selected_default_section_color'] = section_color;
+//            $scope.selectedItem = section_id;
+//            $scope.selectedItemLabel = label;
+//        }
+//
+//        $scope.$on('syncing-complete', function(event, args) {
+//            bindSectionData();
+//            debugger;
+//        });
+//
+//        bindSectionData();
+//
+//        function bindSectionData() {
+//            SectionService.getData().then(function(sresult) {
+//                for (var i = 0; i < sresult.length; i++) {
+//                    option = {
+//                        value: sresult[i]['ID'],
+//                        label: sresult[i]['title'],
+//                        color: sresult[i]['color']
+//                    };
+//                    $scope.sections.push(option);
+//                }
+//
+//            });
+//        }
+//
+//        $scope.goBack = function() {
+//            $ionicHistory.nextViewOptions({
+//                disableBack: true
+//            });
+//            $state.go('menu.setting');
+//        };
+//
     })

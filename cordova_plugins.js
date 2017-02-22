@@ -90,6 +90,15 @@ module.exports = [
             "cordova.InAppBrowser.open",
             "window.open"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-email-composer/www/email_composer.js",
+        "id": "cordova-plugin-email-composer.EmailComposer",
+        "pluginId": "cordova-plugin-email-composer",
+        "clobbers": [
+            "cordova.plugins.email",
+            "plugin.email"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -104,7 +113,8 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.2.2",
     "cordova-sqlite-storage": "1.4.7",
     "ionic-plugin-keyboard": "2.2.1",
-    "cordova-plugin-inappbrowser": "1.6.1"
+    "cordova-plugin-inappbrowser": "1.6.1",
+    "cordova-plugin-email-composer": "0.8.3"
 }
 // BOTTOM OF METADATA
 });

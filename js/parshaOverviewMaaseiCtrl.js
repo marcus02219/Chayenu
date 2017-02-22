@@ -1,6 +1,6 @@
 angular.module('app.controllers')
     .controller('parshaOverviewMaaseiCtrl',
-        function($scope, $ionicScrollDelegate, $ionicModal, $rootScope, SectionService, $state, TextService, ParshaService, $ionicLoading, ionicDatePicker, $ionicHistory) {
+        function($scope, $ionicScrollDelegate, $ionicModal, $rootScope, SectionService, $state, TextService, ParshaService, $ionicLoading, ionicDatePicker, $ionicHistory, $cordovaEmailComposer) {
 //            if (window.localStorage['selected_default_section'] == undefined) {
 //                $state.go('menu.default_settings');
 //            }
@@ -11,7 +11,7 @@ angular.module('app.controllers')
             $scope.parsha_title = "";
             $scope.sttButton = false;
             $scope.sectionCopyright = window.localStorage['last_section_copyright'];
-
+            
             if ($rootScope.modal == undefined) {
                 $ionicModal.fromTemplateUrl('intro.html', {
                     scope: $rootScope,
@@ -131,7 +131,6 @@ angular.module('app.controllers')
             $scope.$on('syncing-complete', function(event, args) {
                 SectionService.getData().then(function(result) {
                     $scope.sectionData = result;
-
                     if (!!window.localStorage['last_section_id'] == true) {
                         if (window.localStorage['last_section_weekly'] == 1) {
                             $ionicHistory.nextViewOptions({
@@ -163,12 +162,28 @@ angular.module('app.controllers')
             $scope.openCopyright = function() {
                 var html = $scope.sectionCopyright;
                 //        var link = html.split('=')[1].split('>')[0].split('"')[1]
-                var link = html.split('="')[1].split('">')[0];
-                window.open(link, '_blank');
+                var link = html.split('||')[0];
+                window.open('link', '_blank');
             };
             $scope.opneMailbox = function(){
                 console.log('test mail');
-                window.open(link, '_blank');
+                $cordovaEmailComposer.isAvailable().then(function() {
+                // is available
+                }, function () {
+                // not available
+                });
+
+                var email = {
+                    to: 'digital@chayenu.org',
+                    cc: '',
+                    subject: 'Contact US',
+                    body: '',
+                    isHtml: true
+                };
+
+                $cordovaEmailComposer.open(email).then(null, function () {
+                // user cancelled email
+                });
             }
             $scope.showDatePicker = function() {
                 var selected_date = angular.copy($scope.selected_date);
@@ -260,6 +275,13 @@ angular.module('app.controllers')
                     $scope.sectionColor = selectedColor;
                 }
                 
+                if(window.localStorage['last_section_copyright'] == undefined){
+                    $scope.sectionCopyright_text = $scope.sectionData[0].copyright.split("||")[1];
+                    window.localStorage['last_section_copyright'] = $scope.sectionData[0].copyright;
+                    $scope.sectionCopyright = $scope.sectionData[0].copyright;
+                }else{
+                    $scope.sectionCopyright_text = window.localStorage['last_section_copyright'].split("||")[1];
+                }
                 
                 $scope.parsha_title = window.localStorage["section_" + section_id + "_selected_parsha_title"];
                 
@@ -357,11 +379,17 @@ angular.module('app.controllers')
 
                         TextService.getData(parsha_id, section_id, $scope.selected_date).then(function(result) {
                             $scope.textData = result;
+                          if(result.length > 10){
+                              $scope.loaded = true;
+                          }else{
+                              $scope.loaded = false;
+                          }
                             $ionicLoading.hide();
+                                                                                              
                         });
-                          if(window.localStorage['first_loaded_app_version'] != 1.0){
+                          if(window.localStorage['first_loaded_app_version'] != APP_VERSION){
                               $rootScope.modal.show();
-                              window.localStorage['first_loaded_app_version'] = 1.0;
+                              window.localStorage['first_loaded_app_version'] = APP_VERSION;
                           }
                       
                     });

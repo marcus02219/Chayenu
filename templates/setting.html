@@ -26,14 +26,10 @@
             
             <label class="item item-input item-select">
                 <div class="input-label">
-                    When opening
-                    <br/>
-                    app to go
+                    When opening app to go
                 </div>
-                <select  ng-model="sectionType" ng-change="updateSectionType(sectionType)">
-                    <option ng-selected="selectedSectionType == 'specific_section'" value="specific_section">SpecificSection</option>
-                    <option ng-selected="selectedSectionType == 'left_off'" value="left_off">Where I left off</option>
-                    <option ng-selected="selectedSectionType == 'section_picker'" value="section_picker">Section picker</option>
+                <select  ng-model="selectedSectionType" ng-change="updateSectionType(selectedSectionType)">
+                    <option ng-repeat="item in specific_section_options" ng-selected="selectedSectionType == item.value" value="{{item.value}}">{{item.label}}</option>
                 </select>
             </label>
             
@@ -41,7 +37,7 @@
                 <div class="input-label" style="font-size:12px;">
                     Selected Section
                 </div>
-                <select ng-model="selectedSection" ng-change="updateSectionID(selectedSection)">
+                <select ng-model="section_item" ng-change="updateSectionID(section_item)">
                     <option ng-repeat="item in sections" ng-selected="selectedSectionID == item.value" value="{{item.value}}***{{item.label}}***{{item.color}}">{{item.label}}</option>
                 </select>
             </label>
@@ -65,16 +61,13 @@
             
             <label class="item item-input item-select">
                 <div class="input-label">
-                    When opening
-                    <br/>
-                    a section go to
+                    When opening a section go to
                 </div>
-                <select  ng-model="dateType" ng-change="updateDateType(dateType)">
-                    <option ng-selected="selectedDateType == 'today'" value="today">Today</option>
-                    <option ng-selected="selectedDateType == 'left_off'" value="left_off">Where I left off</option>
+                <select  ng-model="selectedDateType" ng-change="updateDateType(selectedDateType)">
+                    <option ng-repeat="item in selected_date_type_options" ng-selected="selectedDateType == item.value" value="{{item.value}}">{{item.label}}</option>
                 </select>
             </label>
-
+            
         </ion-list>
     </ion-content>
 </ion-view>

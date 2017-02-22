@@ -10,9 +10,9 @@
     <ion-content padding="true" class="has-header">
         <label class="item item-input item-select">
             <div class="input-label">
-                When opening app
+                When opening
                 <br/>
-                to go
+                app to go
             </div>
             <select  ng-model="sectionType" ng-change="updateSectionType(sectionType)">
                 <option ng-selected="selectedSectionType == 'specific_section'" value="specific_section">SpecificSection</option>
@@ -22,7 +22,7 @@
         </label>
         
         <label class="item item-input item-select" ng-show="isSpecificSection">
-            <div class="input-label">
+            <div class="input-label" style="font-size:12px;">
                 Selected Section
             </div>
             <select ng-model="selectedSection" ng-change="update(selectedSection, '')">
@@ -32,17 +32,17 @@
         
         <div ng-show="isSectionPicker">
             <label class="item item-input">
-                <div class="input-label">
-                    Selected Section
+                <div class="input-label" style="font-size:12px;">
+                    Selected Section:
                 </div>
-                <div>
+                <div style="font-size:12px;">
                     {{selectedItemLabel}}
                 </div>
             </label>
         </div>
         
         <ion-list ng-show="isSectionPicker" ng-model="selectedSection">
-            <ion-item ng-repeat="item in sections" ng-selected="selectedSection == item.value" value="{{item.value}}" ng-click="update(item.value+'***'+item.label+'***'+item.color)">
+            <ion-item ng-repeat="item in sections" ng-selected="selectedSection == item.value" value="{{item.value}}" ng-click="update(item.value+'***'+item.label+'***'+item.color)" style="font-size:12px;padding-left:40px;">
                 {{item.label}}
             </ion-item>
         </ion-list>

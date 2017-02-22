@@ -1,6 +1,8 @@
 var ENV = "phone";
 var MIN_DATE = "2016-10-24";
 var DATE_OFFSET = 0;
+var APP_VERSION = 1.2;
+var DB_VERSION = 1.2;
 DATE_OFFSET = new Date().getTimezoneOffset() > 0 ? 1 : 0
 
 angular.module('app.services', [])
@@ -73,7 +75,16 @@ function DBHelperService($q, $window, dbhelper){
         this.getDB().transaction(function(tx) {
             var deferrals = [$q.defer(), $q.defer(), $q.defer(), $q.defer(), $q.defer()];
             var promises = [deferrals[0].promise, deferrals[1].promise, deferrals[2].promise, deferrals[3].promise, deferrals[4].promise];
-
+             
+            if(window.localStorage['installed_app'] != DB_VERSION){
+                tx.executeSql("DROP TABLE IF EXISTS user_data");
+                tx.executeSql("DROP TABLE IF EXISTS parshas");
+                tx.executeSql("DROP TABLE IF EXISTS sections");
+                tx.executeSql("DROP TABLE IF EXISTS text");
+                tx.executeSql("DROP TABLE IF EXISTS text_child");
+            }
+                                 
+            window.localStorage['installed_app'] = DB_VERSION;
             tx.executeSql("CREATE TABLE IF NOT EXISTS user_data(ID INTEGER PRIMARY KEY AUTOINCREMENT, data_name TEXT, value TEXT)", [], function(tx, result){
                 deferrals[0].resolve(result);
             });
