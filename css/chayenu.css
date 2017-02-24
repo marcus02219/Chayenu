@@ -147,37 +147,37 @@ em,i{
 }
 
 .ionic_datepicker_popup .popup-body .selected_date_full {
-/*    background-color: #009fe3 !important;*/
+    /*    background-color: #009fe3 !important;*/
 }
 .ionic_datepicker_popup .popup-buttons button {
-/*    background-color: #009fe3 !important;*/
+    /*    background-color: #009fe3 !important;*/
 }
 
 .ionic_datepicker_popup .header, .ionic_datepicker_modal .footer {
-/*    background-color: #009fe3 !important;*/
+    /*    background-color: #009fe3 !important;*/
 }
 
 .ionic_datepicker_popup .today {
-/*    border: 1px solid #009fe3 !important;*/
+    /*    border: 1px solid #009fe3 !important;*/
 }
 
 .ionic_datepicker_popup .selected_date {
-/*    background-color: #009fe3 !important;*/
+    /*    background-color: #009fe3 !important;*/
 }
 .ionic_datepicker_popup .popup-body .show_nav .prev_btn_section {
-/*    color: #009fe3 !important;*/
+    /*    color: #009fe3 !important;*/
 }
 
 .ionic_datepicker_popup .popup-body .show_nav .prev_btn_section button {
-/*    color: #009fe3 !important;*/
+    /*    color: #009fe3 !important;*/
 }
 
 .ionic_datepicker_popup .popup-body .show_nav .next_btn_section {
-/*    color: #009fe3 !important;*/
+    /*    color: #009fe3 !important;*/
 }
 
 .ionic_datepicker_popup .popup-body .show_nav .next_btn_section button {
-/*    color: #009fe3 !important;*/
+    /*    color: #009fe3 !important;*/
 }
 
 .ionic_datepicker_popup .popup{
@@ -502,18 +502,72 @@ h1{
         bottom: 0.5em;
     }
 }
-.intro-modal-content{
-    position: absolute;
-    z-index: 999999;
-    overflow: hidden;
-    max-width: 90%;
-    max-height: 90%;
-    width: 90%;
-    height: 90%;
-    background-color: #fff;
-    left:5%;
-    top:5%;
+@media only screen and (max-width: 1024px){
+    .intro-modal-content{
+        position: absolute;
+        z-index: 999999;
+        overflow: hidden;
+        max-width: 60%;
+        max-height: 50%;
+        width: 60%;
+        height: 50%;
+        background-color: #fff;
+        left:20%;
+        top:25%;
+    }
+    
 }
+
+@media only screen and (max-width: 768px){
+    .intro-modal-content{
+        position: absolute;
+        z-index: 999999;
+        overflow: hidden;
+        max-width: 60%;
+        max-height: 50%;
+        width: 60%;
+        height: 50%;
+        background-color: #fff;
+        left:20%;
+        top:25%;
+    }
+    
+}
+
+
+@media only screen and (max-width: 736px){
+    .intro-modal-content{
+        position: absolute;
+        z-index: 999999;
+        overflow: hidden;
+        max-width: 80%;
+        max-height: 70%;
+        width: 80%;
+        height: 70%;
+        background-color: #fff;
+        left:10%;
+        top:15%;
+    }
+    
+}
+
+
+@media only screen and (max-width: 360px){
+    .intro-modal-content{
+        position: absolute;
+        z-index: 999999;
+        overflow: hidden;
+        max-width: 90%;
+        max-height: 80%;
+        width: 90%;
+        height: 80%;
+        background-color: #fff;
+        left:5%;
+        top:10%;
+    }
+    
+}
+
 
 .intro-modal{
     padding-top: 20px;
@@ -538,4 +592,21 @@ h1{
     background-color: rgba(0, 0, 0, 0.6);
     width: 100%;
     height: 100%;
+}
+
+@media only screen and (max-width: 1024px){
+    .intro-modal div{
+        margin-top: 7%;
+    }
+}
+
+@media only screen and (max-width: 414px){
+    .intro-modal div{
+        margin-top: 5%;
+    }
+}
+@media only screen and (max-width: 320px){
+    .intro-modal div{
+        margin-top: 3%;
+    }
 }

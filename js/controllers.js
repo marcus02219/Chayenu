@@ -603,7 +603,7 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
                     TextService.getData(parsha_id, section_id, $scope.date).then(function(result) {
                         $scope.textData = result;
                         $ionicLoading.hide();
-                         if(result.length > 10){
+                         if(result.length > 1){
                              $scope.loaded = true;
                          }else{
                              $scope.loaded = false;
@@ -623,7 +623,7 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
         $scope.selectedDateType     = window.localStorage['selected_default_date_type'] || "today";
         $scope.selectedItemLabel    = window.localStorage['selected_default_section_label'];
         $scope.selectedSectionID    = window.localStorage['selected_default_section'] || 1;
-                
+        $scope.section_item         = "1***Chumash***#fa364a";
         $scope.isSpecificSection = false;
         $scope.isSectionPicker = false;
         
@@ -646,13 +646,14 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
             label: "Large"
         }];
                 
-        $scope.specific_section_options = [{
-            value: "specific_section",label: "SpecificSection"
-            }, {
+        $scope.specific_section_options = [
+            {
+            value: "specific_section",label: "Specific Section"
+            },
+            {
             value: "left_off", label: "Where I left off"
-            }, {
-            value: "section_picker",label: "Section picker"
-        }];
+            }
+        ];
         $scope.selected_date_type_options = [
             {
                 value: "today",label: "Today"
@@ -729,13 +730,33 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
         }
 
     })
-    .controller('aboutCtrl', function($scope, $rootScope, $ionicHistory, $state, $ionicHistory) {
+    .controller('aboutCtrl', function($scope, $rootScope, $ionicHistory, $state, $ionicHistory, $cordovaEmailComposer) {
         $scope.goBack = function() {
             $ionicHistory.nextViewOptions({
                 disableBack: true
             });
             $state.go('menu.setting');
         };
+        $scope.opneMailbox = function(){
+            console.log('test mail');
+            $cordovaEmailComposer.isAvailable().then(function() {
+            // is available
+            }, function () {
+            // not available
+            });
+
+            var email = {
+            to: 'digital@chayenu.org',
+            cc: '',
+            subject: 'Contact US',
+            body: '',
+            isHtml: true
+            };
+
+            $cordovaEmailComposer.open(email).then(null, function () {
+            // user cancelled email
+            });
+        }
 
     })
     .controller('defaultSettingsCtrl', function($scope, $rootScope, $state, SectionService, $ionicHistory) {

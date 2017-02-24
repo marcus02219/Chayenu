@@ -318,7 +318,7 @@ angular.module('app.controllers')
                     TextService.getData(parsha_id, section_id, $scope.date).then(function(result) {
                         $scope.textData = result;
                         $ionicLoading.hide();
-                         if(result.length > 10){
+                         if(result.length >= 1){
                              $scope.loaded = true;
                          }else{
                              $scope.loaded = false;
