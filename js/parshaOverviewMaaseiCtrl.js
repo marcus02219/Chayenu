@@ -259,13 +259,14 @@ angular.module('app.controllers')
                 var selectedSectionType = window.localStorage['selected_default_section_type'];
                 var selectedDateType    = window.localStorage['selected_default_date_type'];
                 
-                var selectedItem        = window.localStorage['selected_default_section'];
-                var selectedItemLabel   = window.localStorage['selected_default_section_label'];
-                var selectedColor       = window.localStorage['selected_default_section_color'];
+                var selectedItem        = window.localStorage['selected_default_section'] || $scope.sectionData[0].ID;
+                var selectedItemLabel   = window.localStorage['selected_default_section_label'] || $scope.sectionData[0].title;
+                var selectedColor       = window.localStorage['selected_default_section_color'] || $scope.sectionData[0].color;
+                
                 var section_id          = 0;
                 var section_title       = "";
                 
-                if(selectedSectionType == "left_off" || selectedSectionType == undefined){
+                if(selectedSectionType == "left_off"){
                     section_id          = window.localStorage["last_section_id"] || $scope.sectionData[0].ID;
                     section_title       = window.localStorage["last_section_title"] || $scope.sectionData[0].title;
                     $scope.sectionColor = window.localStorage["last_section_color"] || $scope.sectionData[0].color;
@@ -379,18 +380,37 @@ angular.module('app.controllers')
 
                         TextService.getData(parsha_id, section_id, $scope.selected_date).then(function(result) {
                             $scope.textData = result;
-                          if(result.length >= 1){
-                              $scope.loaded = true;
-                          }else{
-                              $scope.loaded = false;
-                          }
+                            if(result.length >= 1){
+                                $scope.loaded = true;
+                            }else{
+                                $scope.loaded = false;
+                            }
                             $ionicLoading.hide();
+                            var shown_date = window.localStorage['intro_modal_shown_date'];
+                            if(shown_date == undefined){
+                                var diffDays = 7
+                            }else{
+                                var date1 = new Date(shown_date);
+                                var date2 = new Date();
+
+                                var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                                var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                            }
+
+                            console.log("diffDays----->"+diffDays);
+
+                            if(window.localStorage['first_loaded_app_version'] != APP_VERSION || diffDays > 7){
+                                var delayMillis = 5000; //5 second
+
+                                setTimeout(function() {
+                                   $rootScope.modal.show();
+                                   window.localStorage['first_loaded_app_version'] = APP_VERSION;
+                                   window.localStorage['intro_modal_shown_date'] = new Date();
+                                }, delayMillis);
+                                
+                            }
                                                                                               
                         });
-                          if(window.localStorage['first_loaded_app_version'] != APP_VERSION){
-                              $rootScope.modal.show();
-                              window.localStorage['first_loaded_app_version'] = APP_VERSION;
-                          }
                       
                     });
 

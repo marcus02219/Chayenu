@@ -13,7 +13,19 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
   }, false);
 
   $ionicPlatform.ready(function() {
-   if(ApiService.checkConnection() == true){
+    var synced_date = window.localStorage['local_synced_date'];
+    if(synced_date == undefined){
+       var diffTimes = 25
+    }else{
+       var date1 = new Date(synced_date);
+       var date2 = new Date();
+       
+       var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+       var diffTimes = Math.ceil(timeDiff / (1000 * 3600));
+    }
+    
+                       
+   if(ApiService.checkConnection() == true && diffTimes > 24){
         DBHelperService.createTables().then(function(result){
           $ionicLoading.show({
             template: 'Syncing data...'
@@ -25,6 +37,7 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
             $ionicLoading.hide();
           });
         })
+       window.localStorage['local_synced_date'] = new Date();
    }else{
        $rootScope.$broadcast("syncing-complete");
    }
