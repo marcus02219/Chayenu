@@ -38,7 +38,7 @@
                     Selected Section
                 </div>
                 <select ng-model="section_item" ng-change="updateSectionID(section_item)">
-                    <option ng-repeat="item in sections" ng-selected="selectedSectionID == item.value" value="{{item.value}}***{{item.label}}***{{item.color}}">{{item.label}}</option>
+                    <option ng-repeat="item in sections" ng-selected="selectedSectionID == item.value" value="{{item.value}}***{{item.label}}***{{item.color}}***{{item.weekly}}">{{item.label}}</option>
                 </select>
             </label>
             
@@ -54,7 +54,7 @@
             </div>
             
             <ion-list ng-show="isSectionPicker" ng-model="selectedSection">
-                <ion-item ng-repeat="item in sections" ng-selected="selectedSectionID == item.value" value="{{item.value}}" ng-click="updateSectionID(item.value+'***'+item.label+'***'+item.color)" style="font-size:12px;padding-left:40px;">
+                <ion-item ng-repeat="item in sections" ng-selected="selectedSectionID == item.value" value="{{item.value}}" ng-click="updateSectionID(item.value+'***'+item.label+'***'+item.color+'***'+item.weekly)" style="font-size:12px;padding-left:40px;">
                     {{item.label}}
                 </ion-item>
             </ion-list>

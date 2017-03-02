@@ -1,7 +1,7 @@
 var ENV = "phone";
 var MIN_DATE = "2016-10-24";
 var DATE_OFFSET = 0;
-var APP_VERSION = 1.20;
+var APP_VERSION = 1.21;
 var DB_VERSION = 1.21;
 DATE_OFFSET = new Date().getTimezoneOffset() > 0 ? 1 : 0
 
@@ -366,13 +366,13 @@ function TextService($q, dbhelper, TextChildService){
     function getData(parsha_id, section_id, day){
         var day_num = new Date(day).getDay() + 1;
         var result;
-        console.log("get_text_data="+day);
+        console.log("Text Service Get_text_data=" + day);
         
         // sql = "SELECT text.text_eng, text.text_heb, text.text_both, text.child_id, text.parsha_id, text_child.text_eng AS text_child_eng, text_child.text_heb AS text_child_heb FROM text LEFT JOIN text_child ON text.ID = text_child.parent_id WHERE text.parsha_id = ? AND text.section_id = ? AND text.day_num = ? ORDER BY text.order_key ASC, text_child.sibling_order ASC;"
         sql = "SELECT text.ID, text.child_id, text.text_eng, text.text_heb, text.text_both, text.child_id, text.parsha_id FROM text WHERE text.parsha_id = ? AND text.section_id = ? AND text.day_num = ? ORDER BY text.order_key ASC;"
         var values = [parsha_id, section_id, day_num];
 
-        console.log(values);
+        console.log('text_service_get_data_params------>'+values);
         
         var promises = [];
         var childrenParentIndexes = [];

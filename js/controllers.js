@@ -28,7 +28,12 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
             $scope.date = date.replace(date.substr(4, 2), $scope.selected_date.getDate() + ",");
 
         }
-
+        var selectedDateType    = window.localStorage['selected_default_date_type'];
+        var cur_date            = new Date().format("dddd, mmm, d'th', yyyy");
+        if(selectedDateType != "left_off"){
+            $scope.selected_date = new Date();
+            $scope.date = cur_date;
+        }
         window.localStorage['parsha_id'] = 1;
 
         window.localStorage['last_section_id'] = $stateParams['section_id'];
@@ -36,7 +41,7 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
         window.localStorage['last_section_weekly'] = 0;
         window.localStorage['last_section_color'] = $stateParams['section_color'];
         window.localStorage['last_section_copyright'] = $stateParams['section_copyright'];
-                console.log("------------->"+window.localStorage['last_section_copyright']);
+        console.log("------------->"+window.localStorage['last_section_copyright']);
         $scope.section = $stateParams['section_name'];
         $scope.sectionColor = $stateParams['section_color'];
         $scope.sectionCopyright = window.localStorage['last_section_copyright'];
@@ -312,7 +317,15 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
             $scope.date = $stateParams['day'];
             $scope.set_date = false;
         }
-        $scope.selected_date = new Date($scope.date);
+                
+        var selectedDateType    = window.localStorage['selected_default_date_type'];
+        var cur_date            = new Date().format("dddd, mmm, d'th', yyyy");
+        if(selectedDateType != "left_off"){
+            $scope.date = cur_date;
+        }
+        $scope.selected_date = new Date($scope.date.replace('th,', ','));
+//        $scope.selected_date = new Date($scope.date);
+                
         window.localStorage['parsha_id'] = 1;
         window.localStorage['last_section_id'] = $stateParams['section_id'];
         window.localStorage['last_section_title'] = $stateParams['section_name'];
@@ -623,7 +636,7 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
         $scope.selectedDateType     = window.localStorage['selected_default_date_type'] || "today";
         $scope.selectedItemLabel    = window.localStorage['selected_default_section_label'];
         $scope.selectedSectionID    = window.localStorage['selected_default_section'] || 1;
-        $scope.section_item         = "1***Chumash***#fa364a";
+        $scope.section_item         = "1***Chumash***#fa364a***0";
         $scope.isSpecificSection = false;
         $scope.isSectionPicker = false;
         
@@ -681,6 +694,7 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
                 $scope.isSpecificSection = true;
             } else {
                 $scope.isSpecificSection = false;
+                window.localStorage['default_section_weekly'] = 0
             }
 
             if (section_type == "section_picker") {
@@ -701,9 +715,13 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
             section_id = section.split('***')[0];
             label = section.split('***')[1];
             section_color = section.split('***')[2];
-            window.localStorage['selected_default_section'] = section_id;
-            window.localStorage['selected_default_section_label'] = label;
-            window.localStorage['selected_default_section_color'] = section_color;
+            weekly_type = section.split('***')[3];
+            window.localStorage['selected_default_section']         = section_id;
+            window.localStorage['selected_default_section_label']   = label;
+            window.localStorage['selected_default_section_color']   = section_color;
+            window.localStorage['last_section_weekly']              = weekly_type == '1' ? 1 : 0;
+            window.localStorage['default_section_weekly']           = weekly_type == '1' ? 1 : 0;
+            window.localStorage['last_section_id']                  = section_id;
             $scope.selectedSectionID = section_id;
             $scope.selectedItemLabel = label;
         }
@@ -721,7 +739,8 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
                     option = {
                         value: sresult[i]['ID'],
                         label: sresult[i]['title'],
-                        color: sresult[i]['color']
+                        color: sresult[i]['color'],
+                        weekly: sresult[i]['weekly']
                     };
                     $scope.sections.push(option);
                 }

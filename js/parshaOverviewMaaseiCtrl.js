@@ -11,7 +11,8 @@ angular.module('app.controllers')
             $scope.parsha_title = "";
             $scope.sttButton = false;
             $scope.sectionCopyright = window.localStorage['last_section_copyright'];
-            
+            $scope.isChangingDateEvent = false;
+                
             if ($rootScope.modal == undefined) {
                 $ionicModal.fromTemplateUrl('intro.html', {
                     scope: $rootScope,
@@ -131,8 +132,9 @@ angular.module('app.controllers')
             $scope.$on('syncing-complete', function(event, args) {
                 SectionService.getData().then(function(result) {
                     $scope.sectionData = result;
-                    if (!!window.localStorage['last_section_id'] == true) {
-                        if (window.localStorage['last_section_weekly'] == 1) {
+                    if (window.localStorage['last_section_id']) {
+//                                               || window.localStorage['last_section_weekly'] == 1
+                        if (window.localStorage['default_section_weekly'] == 1) {
                             $ionicHistory.nextViewOptions({
                                 disableBack: true
                             });
@@ -217,6 +219,7 @@ angular.module('app.controllers')
             };
 
             $scope.showPrevData = function() {
+                $scope.isChangingDateEvent = true;
                 var dd = angular.copy($rootScope.st_date);
                 if ($scope.selected_date <= dd) {
                     return false;
@@ -230,6 +233,7 @@ angular.module('app.controllers')
                 bindTextData();
             }
             $scope.showNextData = function() {
+                $scope.isChangingDateEvent = true;
                 var dd = angular.copy($rootScope.ed_date);
                 dd.setDate(dd.getDate() - 1);
                 if ($scope.selected_date >= dd) {
@@ -291,7 +295,7 @@ angular.module('app.controllers')
                 var dd = new Date().format("dddd, mmm, d'th', yyyy");
                 var date = window.localStorage["section_" + section_id] || dd
                 
-                if(selectedDateType == "today"){
+                if(selectedDateType != "left_off" && $scope.isChangingDateEvent == false){
                     date = dd;
                 }
                 
