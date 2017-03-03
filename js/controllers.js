@@ -61,7 +61,6 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
 
         $scope.openCopyright = function() {
             var html = $scope.sectionCopyright;
-            //        var link = html.split('=')[1].split('>')[0].split('"')[1]
             var link = html.split('||')[0];
             window.open(link, '_blank');
         };
@@ -394,10 +393,9 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
             disableBack: true
         });
         $scope.openCopyright = function() {
-        var html = $scope.sectionCopyright;
-        //        var link = html.split('=')[1].split('>')[0].split('"')[1]
-        var link = html.split('||')[0];
-        window.open(link, '_blank');
+            var html = $scope.sectionCopyright;
+            var link = html.split('||')[0];
+            window.open(link, '_blank');
         };
 
 

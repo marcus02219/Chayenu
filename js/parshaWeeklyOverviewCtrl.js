@@ -101,10 +101,9 @@ angular.module('app.controllers')
           disableBack: true
       });
       $scope.openCopyright = function() {
-      var html = $scope.sectionCopyright;
-      //        var link = html.split('=')[1].split('>')[0].split('"')[1]
-      var link = html.split('||')[0];
-      window.open(link, '_blank');
+          var html = $scope.sectionCopyright;
+          var link = html.split('||')[0];                    
+          window.open(link, '_blank');
       };
 
 
@@ -221,12 +220,13 @@ angular.module('app.controllers')
           var parsha_id = 0;
           var selected_dt = $scope.selected_date;
             if(window.localStorage['default_section_copyright'] == undefined){
+                $scope.sectionCopyright = $scope.sectionData[0].copyright;
                 $scope.sectionCopyright_text = $scope.sectionData[0].copyright.split("||")[1];
                 window.localStorage['last_section_copyright'] = $scope.sectionData[0].copyright;
             }else{
-                $scope.sectionCopyright_text = window.localStorage['default_section_copyright'].split("||")[1];
-                window.localStorage['last_section_copyright'] = window.localStorage['default_section_copyright'];
                 $scope.sectionCopyright = window.localStorage['default_section_copyright'];
+                $scope.sectionCopyright_text = $scope.sectionCopyright.split("||")[1];
+                window.localStorage['last_section_copyright'] = window.localStorage['default_section_copyright'];
             }
           $scope.parsha_days = [];
 console.log('selected_dt---->'+selected_dt);

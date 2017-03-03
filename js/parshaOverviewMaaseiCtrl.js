@@ -10,7 +10,7 @@ angular.module('app.controllers')
             $scope.sectionColor = window.localStorage['last_section_color'] || "#da2b40";
             $scope.parsha_title = "";
             $scope.sttButton = false;
-            $scope.sectionCopyright = window.localStorage['last_section_copyright'];
+//            $scope.sectionCopyright = window.localStorage['last_section_copyright'];
             $scope.isChangingDateEvent = false;
                 
             if ($rootScope.modal == undefined) {
@@ -163,9 +163,8 @@ angular.module('app.controllers')
             });
             $scope.openCopyright = function() {
                 var html = $scope.sectionCopyright;
-                //        var link = html.split('=')[1].split('>')[0].split('"')[1]
                 var link = html.split('||')[0];
-                window.open('link', '_blank');
+                window.open(link, '_blank');
             };
             $scope.opneMailbox = function(){
                 console.log('test mail');
@@ -281,12 +280,13 @@ angular.module('app.controllers')
                 }
                 
                 if(window.localStorage['default_section_copyright'] == undefined){
+                    $scope.sectionCopyright = $scope.sectionData[0].copyright;
                     $scope.sectionCopyright_text = $scope.sectionData[0].copyright.split("||")[1];
                     window.localStorage['last_section_copyright'] = $scope.sectionData[0].copyright;
                 }else{
-                    $scope.sectionCopyright_text = window.localStorage['default_section_copyright'].split("||")[1];
-                    window.localStorage['last_section_copyright'] = window.localStorage['default_section_copyright'];
                     $scope.sectionCopyright = window.localStorage['default_section_copyright'];
+                    $scope.sectionCopyright_text = $scope.sectionCopyright.split("||")[1];
+                    window.localStorage['last_section_copyright'] = window.localStorage['default_section_copyright'];
                 }
                 
                 $scope.parsha_title = window.localStorage["section_" + section_id + "_selected_parsha_title"];
