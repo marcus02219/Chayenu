@@ -636,7 +636,7 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
         $scope.selectedDateType     = window.localStorage['selected_default_date_type'] || "today";
         $scope.selectedItemLabel    = window.localStorage['selected_default_section_label'];
         $scope.selectedSectionID    = window.localStorage['selected_default_section'] || 1;
-        $scope.section_item         = "1***Chumash***#fa364a***0";
+                
         $scope.isSpecificSection = false;
         $scope.isSectionPicker = false;
         
@@ -716,12 +716,15 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
             label = section.split('***')[1];
             section_color = section.split('***')[2];
             weekly_type = section.split('***')[3];
+            copyright_link = section.split('***')[4];
+                
             window.localStorage['selected_default_section']         = section_id;
             window.localStorage['selected_default_section_label']   = label;
             window.localStorage['selected_default_section_color']   = section_color;
             window.localStorage['last_section_weekly']              = weekly_type == '1' ? 1 : 0;
             window.localStorage['default_section_weekly']           = weekly_type == '1' ? 1 : 0;
             window.localStorage['last_section_id']                  = section_id;
+            window.localStorage['default_section_copyright']        = copyright_link;
             $scope.selectedSectionID = section_id;
             $scope.selectedItemLabel = label;
         }
@@ -740,11 +743,12 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
                         value: sresult[i]['ID'],
                         label: sresult[i]['title'],
                         color: sresult[i]['color'],
-                        weekly: sresult[i]['weekly']
+                        weekly: sresult[i]['weekly'],
+                        copyright: sresult[i]['copyright']
                     };
                     $scope.sections.push(option);
                 }
-
+                $scope.section_item  = $scope.sections[0]['value']+"***"+$scope.sections[0]['label']+"***"+$scope.sections[0]['color']+"***"+$scope.sections[0]['weekly']+"***"+$scope.sections[0]['copyright'];
             });
         }
 

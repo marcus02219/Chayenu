@@ -220,6 +220,14 @@ angular.module('app.controllers')
           });
           var parsha_id = 0;
           var selected_dt = $scope.selected_date;
+            if(window.localStorage['default_section_copyright'] == undefined){
+                $scope.sectionCopyright_text = $scope.sectionData[0].copyright.split("||")[1];
+                window.localStorage['last_section_copyright'] = $scope.sectionData[0].copyright;
+            }else{
+                $scope.sectionCopyright_text = window.localStorage['default_section_copyright'].split("||")[1];
+                window.localStorage['last_section_copyright'] = window.localStorage['default_section_copyright'];
+                $scope.sectionCopyright = window.localStorage['default_section_copyright'];
+            }
           $scope.parsha_days = [];
 console.log('selected_dt---->'+selected_dt);
           ParshaService.getData(selected_dt)

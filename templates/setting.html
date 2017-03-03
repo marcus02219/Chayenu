@@ -26,7 +26,7 @@
             
             <label class="item item-input item-select">
                 <div class="input-label">
-                    When opening app to go
+                    When opening app go to
                 </div>
                 <select  ng-model="selectedSectionType" ng-change="updateSectionType(selectedSectionType)">
                     <option ng-repeat="item in specific_section_options" ng-selected="selectedSectionType == item.value" value="{{item.value}}">{{item.label}}</option>
@@ -38,27 +38,27 @@
                     Selected Section
                 </div>
                 <select ng-model="section_item" ng-change="updateSectionID(section_item)">
-                    <option ng-repeat="item in sections" ng-selected="selectedSectionID == item.value" value="{{item.value}}***{{item.label}}***{{item.color}}***{{item.weekly}}">{{item.label}}</option>
+                    <option ng-repeat="item in sections" ng-selected="selectedSectionID == item.value" value="{{item.value}}***{{item.label}}***{{item.color}}***{{item.weekly}}***{{item.copyright}}">{{item.label}}</option>
                 </select>
             </label>
             
-            <div ng-show="isSectionPicker">
-                <label class="item item-input">
-                    <div class="input-label" style="font-size:12px;">
-                        Selected Section
-                    </div>
-                    <div style="font-size:12px;">
-                        {{selectedItemLabel}}
-                    </div>
-                </label>
-            </div>
-            
-            <ion-list ng-show="isSectionPicker" ng-model="selectedSection">
-                <ion-item ng-repeat="item in sections" ng-selected="selectedSectionID == item.value" value="{{item.value}}" ng-click="updateSectionID(item.value+'***'+item.label+'***'+item.color+'***'+item.weekly)" style="font-size:12px;padding-left:40px;">
-                    {{item.label}}
-                </ion-item>
-            </ion-list>
-            
+<!--            <div ng-show="isSectionPicker">-->
+<!--                <label class="item item-input">-->
+<!--                    <div class="input-label" style="font-size:12px;">-->
+<!--                        Selected Section-->
+<!--                    </div>-->
+<!--                    <div style="font-size:12px;">-->
+<!--                        {{selectedItemLabel}}-->
+<!--                    </div>-->
+<!--                </label>-->
+<!--            </div>-->
+<!--            -->
+<!--            <ion-list ng-show="isSectionPicker" ng-model="selectedSection">-->
+<!--                <ion-item ng-repeat="item in sections" ng-selected="selectedSectionID == item.value" value="{{item.value}}" ng-click="updateSectionID(item.value+'***'+item.label+'***'+item.color+'***'+item.weekly)" style="font-size:12px;padding-left:40px;">-->
+<!--                    {{item.label}}-->
+<!--                </ion-item>-->
+<!--            </ion-list>-->
+
             <label class="item item-input item-select">
                 <div class="input-label">
                     When opening a section go to

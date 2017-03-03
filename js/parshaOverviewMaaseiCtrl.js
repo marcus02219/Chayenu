@@ -280,12 +280,13 @@ angular.module('app.controllers')
                     $scope.sectionColor = selectedColor;
                 }
                 
-                if(window.localStorage['last_section_copyright'] == undefined){
+                if(window.localStorage['default_section_copyright'] == undefined){
                     $scope.sectionCopyright_text = $scope.sectionData[0].copyright.split("||")[1];
                     window.localStorage['last_section_copyright'] = $scope.sectionData[0].copyright;
-                    $scope.sectionCopyright = $scope.sectionData[0].copyright;
                 }else{
-                    $scope.sectionCopyright_text = window.localStorage['last_section_copyright'].split("||")[1];
+                    $scope.sectionCopyright_text = window.localStorage['default_section_copyright'].split("||")[1];
+                    window.localStorage['last_section_copyright'] = window.localStorage['default_section_copyright'];
+                    $scope.sectionCopyright = window.localStorage['default_section_copyright'];
                 }
                 
                 $scope.parsha_title = window.localStorage["section_" + section_id + "_selected_parsha_title"];
