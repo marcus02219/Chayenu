@@ -568,6 +568,22 @@ h1{
     
 }
 
+@media only screen and (max-width: 480px){
+    .intro-modal-content{
+        position: absolute;
+        z-index: 999999;
+        overflow: hidden;
+        max-width: 90%;
+        max-height: 90%;
+        width: 90%;
+        height: 90%;
+        background-color: #fff;
+        left:5%;
+        top:5%;
+    }
+    
+}
+
 
 .intro-modal{
     padding-top: 20px;
@@ -602,11 +618,11 @@ h1{
 
 @media only screen and (max-width: 414px){
     .intro-modal div{
-        margin-top: 5%;
+        margin-top: 9%;
     }
 }
 @media only screen and (max-width: 320px){
     .intro-modal div{
-        margin-top: 3%;
+        margin-top: 2%;
     }
 }
