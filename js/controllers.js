@@ -291,7 +291,7 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
                     $scope.disable_days = disable_days;
                     TextService.getData(parsha_id, section_id, selected_dt).then(function(result) {
                         $scope.textData = result;
-                         if(result.length > 10){
+                         if(result.length > 0){
                              $scope.loaded = true;
                          }else{
                              $scope.loaded = false;
@@ -303,7 +303,6 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
         }
     })
     .controller('WeeklyStudyController', function($scope, $ionicScrollDelegate, $location, TextService, $stateParams, $rootScope, ApiService, $ionicLoading, $filter, ionicDatePicker, ParshaService, $ionicHistory) {
-        $scope.date = window.localStorage["section_" + $stateParams['section_id']];
         $scope.disable_days = [];
         $scope.set_date = true;
         $scope.loaded = false;
@@ -312,18 +311,28 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
         var section_id = +$stateParams['section_id'];
 
         $scope.weekly_index = parseInt(window.localStorage["section_weekly_index_" + section_id]) || 0;
-        if ($stateParams['day'] && $scope.date === undefined) {
-            $scope.date = $stateParams['day'];
-            $scope.set_date = false;
-        }
                 
+//        if ($stateParams['day'] && $scope.date === undefined) {
+//            $scope.date = $stateParams['day'];
+//            $scope.set_date = false;
+//        }
         var selectedDateType    = window.localStorage['selected_default_date_type'];
-        var cur_date            = new Date().format("dddd, mmm, d'th', yyyy");
+        var cur_date            = new Date();
+        cur_date                = cur_date.addDays(0 - cur_date.getDay());
+        $scope.date             = window.localStorage["section_" + $stateParams['section_id']] || cur_date.format("dddd, mmm, d, yyyy");
+                
         if(selectedDateType != "left_off"){
-            $scope.date = cur_date;
+            $scope.date = cur_date.format("dddd, mmm, d, yyyy");
         }
-        $scope.selected_date = new Date($scope.date.replace('th,', ','));
+        $scope.selected_date = new Date($scope.date);
+                
+console.log('aaaa---'+$scope.date)
+console.log('bbbb---'+$scope.selected_date)
+                
+
 //        $scope.selected_date = new Date($scope.date);
+                console.log('aaaa'+$scope.date)
+                console.log('bbbb'+$scope.selected_date)
                 
         window.localStorage['parsha_id'] = 1;
         window.localStorage['last_section_id'] = $stateParams['section_id'];
@@ -597,13 +606,10 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
 
                         console.log('$scope.weekly_index->' + $scope.weekly_index);
 
-                        $scope.selected_date = $scope.parsha_days[$scope.weekly_index][0]
-                        $scope.selected_date.setDate($scope.selected_date.getDate() + 1)
-                        var date = $scope.selected_date.toDateString().slice(4, 15);
-                        date = date.replace(date.substr(4, 2), $scope.selected_date.getDate() + ",");
-                        window.localStorage["section_" + section_id] = date;
+                        $scope.selected_date = $scope.parsha_days[$scope.weekly_index][0];
+                        var date = $scope.selected_date;
+                        window.localStorage["section_" + section_id] = date.format("dddd, mmm, d, yyyy");
                         $scope.date = date;
-                        selected_dt = new Date($scope.date);
                         console.log('scope.date->' + $scope.date);
                     }
                     console.log('parsha_id->' + parsha_id);
@@ -614,7 +620,7 @@ angular.module('app.controllers', ['ionic', 'data.sync', 'db_starter', 'ngSaniti
                     TextService.getData(parsha_id, section_id, $scope.date).then(function(result) {
                         $scope.textData = result;
                         $ionicLoading.hide();
-                         if(result.length > 1){
+                         if(result.length > 0){
                              $scope.loaded = true;
                          }else{
                              $scope.loaded = false;

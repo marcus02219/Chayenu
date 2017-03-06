@@ -385,7 +385,7 @@ angular.module('app.controllers')
 
                         TextService.getData(parsha_id, section_id, $scope.selected_date).then(function(result) {
                             $scope.textData = result;
-                            if(result.length >= 1){
+                            if(result.length > 0){
                                 $scope.loaded = true;
                             }else{
                                 $scope.loaded = false;

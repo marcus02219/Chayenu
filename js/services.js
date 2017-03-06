@@ -1,7 +1,7 @@
 var ENV = "phone";
 var MIN_DATE = "2016-10-24";
 var DATE_OFFSET = 0;
-var APP_VERSION = 1.21;
+var APP_VERSION = 1.20;
 var DB_VERSION = 1.21;
 DATE_OFFSET = new Date().getTimezoneOffset() > 0 ? 1 : 0
 

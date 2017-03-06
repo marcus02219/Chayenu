@@ -18,7 +18,7 @@ angular.module('app.controllers')
                 
         var cur_date         = new Date();
         cur_date             = cur_date.addDays(0 - cur_date.getDay());
-        $scope.date          = window.localStorage["section_" + section_id] || cur_date;
+        $scope.date          = window.localStorage["section_" + section_id] || cur_date.format("dddd, mmm, d, yyyy");
                 
         if(selectedDateType != "left_off"){
             $scope.date = cur_date.format("dddd, mmm, d, yyyy");
@@ -31,7 +31,8 @@ angular.module('app.controllers')
                 $scope.section          = window.localStorage['selected_default_section_label']
                 $scope.sectionColor     = window.localStorage['selected_default_section_color']
         }
-
+console.log('aaaa'+$scope.date)
+console.log('bbbb'+$scope.selected_date)
         $scope.weekly_index = parseInt(window.localStorage["section_weekly_index_" + section_id]) || 0;
         
 
@@ -102,7 +103,7 @@ angular.module('app.controllers')
       });
       $scope.openCopyright = function() {
           var html = $scope.sectionCopyright;
-          var link = html.split('||')[0];                    
+          var link = html.split('||')[0];
           window.open(link, '_blank');
       };
 
@@ -306,7 +307,7 @@ console.log('selected_dt---->'+selected_dt);
                   if ($scope.set_date == false) {
                       $scope.set_date = true;
 
-                      console.log('$scope.weekly_index->' + $scope.weekly_index);
+                      console.log('$scope_weekly_index->' + $scope.weekly_index);
 
                       $scope.selected_date = $scope.parsha_days[$scope.weekly_index][0];
                       $scope.selected_date.setDate($scope.selected_date.getDate() + 1);
@@ -315,17 +316,17 @@ console.log('selected_dt---->'+selected_dt);
                       window.localStorage["section_" + section_id] = date;
                       $scope.date = date;
                       selected_dt = new Date($scope.date);
-    console.log('scope.date->' + $scope.date);
+                      console.log('sest_false_scope_date->' + $scope.date);
                   }
                   console.log('parsha_id->' + parsha_id);
                   console.log('section_id->' + section_id);
-                console.log('scope_date->' + $scope.date);
+                  console.log('scope_date->' + $scope.date);
                   /* end 2016-11-16 */
 
                   TextService.getData(parsha_id, section_id, $scope.date).then(function(result) {
                       $scope.textData = result;
                       $ionicLoading.hide();
-                       if(result.length > 1){
+                       if(result.length > 0){
                            $scope.loaded = true;
                        }else{
                            $scope.loaded = false;
