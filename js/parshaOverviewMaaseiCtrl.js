@@ -168,23 +168,24 @@ angular.module('app.controllers')
             };
             $scope.opneMailbox = function(){
                 console.log('test mail');
-                $cordovaEmailComposer.isAvailable().then(function() {
-                // is available
-                }, function () {
-                // not available
-                });
+                            $cordovaEmailComposer.isAvailable().then(function() {
+                            // is available
+                            var email = {
+                                        to: 'digital@chayenu.org',
+                                        cc: '',
+                                        subject: 'Contact US',
+                                        body: '',
+                                        isHtml: true
+                                        };
 
-                var email = {
-                    to: 'digital@chayenu.org',
-                    cc: '',
-                    subject: 'Contact US',
-                    body: '',
-                    isHtml: true
-                };
+                                        $cordovaEmailComposer.open(email).then(null, function () {
+                                        // user cancelled email
+                                        });
 
-                $cordovaEmailComposer.open(email).then(null, function () {
-                // user cancelled email
-                });
+                            }, function () {
+                            // not available
+                            alert("Set your email");
+                            });
             }
             $scope.showDatePicker = function() {
                 var selected_date = angular.copy($scope.selected_date);

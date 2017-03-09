@@ -640,7 +640,7 @@ console.log('bbbb---'+$scope.selected_date)
         $scope.selectedDateType     = window.localStorage['selected_default_date_type'] || "today";
         $scope.selectedItemLabel    = window.localStorage['selected_default_section_label'];
         $scope.selectedSectionID    = window.localStorage['selected_default_section'] || 1;
-                
+//        $scope.last_selected_section_item = window.localStorage['settings_last_selected_section_item'] || "1***Chumash***#fa364a***0***http://feldheim.com || Feldheim Publishers";
         $scope.isSpecificSection = false;
         $scope.isSectionPicker = false;
         
@@ -716,6 +716,8 @@ console.log('bbbb---'+$scope.selected_date)
 
         $scope.updateSectionID = function(section) {
             console.log('selected_section----->' + section);
+            window.localStorage['settings_last_selected_section_item'] = section;
+            
             section_id = section.split('***')[0];
             label = section.split('***')[1];
             section_color = section.split('***')[2];
@@ -752,7 +754,7 @@ console.log('bbbb---'+$scope.selected_date)
                     };
                     $scope.sections.push(option);
                 }
-                $scope.section_item  = $scope.sections[0]['value']+"***"+$scope.sections[0]['label']+"***"+$scope.sections[0]['color']+"***"+$scope.sections[0]['weekly']+"***"+$scope.sections[0]['copyright'];
+                $scope.section_item  = window.localStorage['settings_last_selected_section_item'] || $scope.sections[0]['value']+"***"+$scope.sections[0]['label']+"***"+$scope.sections[0]['color']+"***"+$scope.sections[0]['weekly']+"***"+$scope.sections[0]['copyright'];
             });
         }
 

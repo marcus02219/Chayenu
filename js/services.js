@@ -1,8 +1,8 @@
 var ENV = "phone";
 var MIN_DATE = "2016-10-24";
 var DATE_OFFSET = 0;
-var APP_VERSION = 1.20;
-var DB_VERSION = 1.21;
+var APP_VERSION = 1.291;
+var DB_VERSION = 1.291;
 DATE_OFFSET = new Date().getTimezoneOffset() > 0 ? 1 : 0
 
 angular.module('app.services', [])
@@ -68,6 +68,7 @@ function DBHelperService($q, $window, dbhelper){
 
     function createTables(){
         var mainDefer = $q.defer();
+
         if(!this.getDB()){
             mainDefer.resolve("sqlite plugin is not available");
             return mainDefer.promise;
@@ -75,7 +76,7 @@ function DBHelperService($q, $window, dbhelper){
         this.getDB().transaction(function(tx) {
             var deferrals = [$q.defer(), $q.defer(), $q.defer(), $q.defer(), $q.defer()];
             var promises = [deferrals[0].promise, deferrals[1].promise, deferrals[2].promise, deferrals[3].promise, deferrals[4].promise];
-             
+
             if(window.localStorage['installed_app'] != DB_VERSION){
                 tx.executeSql("DROP TABLE IF EXISTS user_data");
                 tx.executeSql("DROP TABLE IF EXISTS parshas");
@@ -500,10 +501,10 @@ function ApiService($q, $injector){
     };
 
     function initApi(date, type){
+
         if(checkConnection() == false){
             return false;
         }
-        
         if(type == "fetch"){
             var mainDefer = $q.defer();
             var that = this;
@@ -540,7 +541,7 @@ function ApiService($q, $injector){
         
         $.ajax({
             type: "GET",
-            url: "http://104.236.239.55/api_dev/sync_data.php?last_synced="+last_date,
+            url: "https://chayenu.pw/api/live2.php?last_synced="+last_date,
             dataType: "json",
             success: function (response_data) {
                 

@@ -15,17 +15,16 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
   $ionicPlatform.ready(function() {
     var synced_date = window.localStorage['local_synced_date'];
     if(synced_date == undefined){
-       var diffTimes = 25
+       var diffTimes = 6
     }else{
        var date1 = new Date(synced_date);
        var date2 = new Date();
-       
+
        var timeDiff = Math.abs(date2.getTime() - date1.getTime());
        var diffTimes = Math.ceil(timeDiff / (1000 * 3600));
     }
-    
-                       
-   if(ApiService.checkConnection() == true && diffTimes > 24){
+
+    if(window.localStorage['installed_app'] != DB_VERSION || (ApiService.checkConnection() == true && diffTimes >= 6)){
         DBHelperService.createTables().then(function(result){
           $ionicLoading.show({
             template: 'Syncing data...'
@@ -38,9 +37,10 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
           });
         })
        window.localStorage['local_synced_date'] = new Date();
-   }else{
+    }else{
        $rootScope.$broadcast("syncing-complete");
-   }
+    }
+
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     var dateFormat = function () {
